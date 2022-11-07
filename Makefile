@@ -28,7 +28,7 @@ go-config.json: config.json.template subversion
 		sed -e "s/PACKAGE-NAME/${GO_PACKAGE_NAME}/g"> $@
 
 %/: swagger.json %-config.json
-	${SWAGGER} generate \
+	rm -rf $@ && ${SWAGGER} generate \
 		-i swagger.json \
 		-l $$(basename $@) \
 		-o $@ \
