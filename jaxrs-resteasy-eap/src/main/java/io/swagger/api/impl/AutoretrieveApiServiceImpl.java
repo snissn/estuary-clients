@@ -13,7 +13,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyEapServerCodegen", date = "2022-11-07T20:06:03.798Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyEapServerCodegen", date = "2022-11-07T23:47:22.084Z")
 public class AutoretrieveApiServiceImpl implements AutoretrieveApi {
       public Response autoretrieveHeartbeatPost(String token,SecurityContext securityContext) {
       // do some magic!
