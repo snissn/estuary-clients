@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * UtilContentAddIpfsBody
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-07T20:05:43.812Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-07T23:47:19.728Z")
 public class UtilContentAddIpfsBody {
   @SerializedName("coluuid")
   private String coluuid = null;
