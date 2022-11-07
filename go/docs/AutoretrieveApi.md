@@ -9,7 +9,11 @@ Method | HTTP request | Description
 [**AutoretrieveHeartbeatPost**](AutoretrieveApi.md#AutoretrieveHeartbeatPost) | **Post** /autoretrieve/heartbeat | Marks autoretrieve server as up
 
 # **AdminAutoretrieveInitPost**
+<<<<<<< HEAD
 > AdminAutoretrieveInitPost(ctx, body)
+=======
+> string AdminAutoretrieveInitPost(ctx, addresses, pubKey)
+>>>>>>> main
 Register autoretrieve server
 
 This endpoint registers a new autoretrieve server
@@ -23,7 +27,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+**string**
 
 ### Authorization
 
@@ -37,7 +41,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **AdminAutoretrieveListGet**
-> AdminAutoretrieveListGet(ctx, )
+> string AdminAutoretrieveListGet(ctx, )
 List autoretrieve servers
 
 This endpoint lists all registered autoretrieve servers
@@ -47,7 +51,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
- (empty response body)
+**string**
 
 ### Authorization
 
@@ -61,7 +65,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **AutoretrieveHeartbeatPost**
-> AutoretrieveHeartbeatPost(ctx, token)
+> string AutoretrieveHeartbeatPost(ctx, token)
 Marks autoretrieve server as up
 
 This endpoint updates the lastConnection field for autoretrieve
@@ -75,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+**string**
 
 ### Authorization
 

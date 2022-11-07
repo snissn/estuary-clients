@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**UserStatsGet**](UserApi.md#UserStatsGet) | **Get** /user/stats | Create API keys for a user
 
 # **UserApiKeysGet**
-> []MainGetApiKeysResp UserApiKeysGet(ctx, )
+> [][]MainGetApiKeysResp UserApiKeysGet(ctx, )
 Get API keys for a user
 
 This endpoint is used to get API keys for a user. In estuary, each user can be given multiple API keys (tokens). This endpoint can be used to retrieve all available API keys for a given user.
@@ -21,7 +21,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**[]MainGetApiKeysResp**](main.getApiKeysResp.md)
+[**[][]MainGetApiKeysResp**](array.md)
 
 ### Authorization
 
@@ -35,7 +35,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UserApiKeysKeyDelete**
-> UserApiKeysKeyDelete(ctx, key)
+> string UserApiKeysKeyDelete(ctx, key)
 Revoke a User API Key.
 
 This endpoint is used to revoke a user API key. In estuary, every user is assigned with an API key, this API key is generated and issued for each user and is primarily use to access all estuary features. This endpoint can be used to revoke the API key thats assigned to the user.
@@ -49,7 +49,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+**string**
 
 ### Authorization
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a UserApiUserApiKeysPostOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **expiry** | **optional.String**| Expiration - Expiration - Valid time units are ns, us (or µs), ms, s, m, h. for example 300h | 
+ **expiry** | **optional.String**| Expiration - Expiration - Valid time units are ns, us (or µs),  ms,  s,  m,  h.  for  example  300h | 
  **perms** | **optional.String**| Permissions -- currently unused | 
 
 ### Return type
@@ -122,7 +122,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UserStatsGet**
-> MainUserStatsResponse UserStatsGet(ctx, )
+> string UserStatsGet(ctx, )
 Create API keys for a user
 
 This endpoint is used to create API keys for a user.
@@ -132,7 +132,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**MainUserStatsResponse**](main.userStatsResponse.md)
+**string**
 
 ### Authorization
 
