@@ -4,20 +4,18 @@ All URIs are relative to *//api.estuary.tech/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PublicMetricsDealsOnChainGet**](MetricsApi.md#PublicMetricsDealsOnChainGet) | **Get** /public/metrics/deals-on-chain | Get deal metrics
+[**DealTransferStatusPost**](DefaultApi.md#DealTransferStatusPost) | **Post** /deal/transfer/status | 
 
-# **PublicMetricsDealsOnChainGet**
-> string PublicMetricsDealsOnChainGet(ctx, )
-Get deal metrics
+# **DealTransferStatusPost**
+> DealTransferStatusPost(ctx, )
 
-This endpoint is used to get deal metrics
 
 ### Required Parameters
 This endpoint does not need any parameter.
 
 ### Return type
 
-**string**
+ (empty response body)
 
 ### Authorization
 
