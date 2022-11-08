@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 import io.swagger.annotations.*;
 
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyEapServerCodegen", date = "2022-11-07T23:47:22.084Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyEapServerCodegen", date = "2022-11-07T23:55:53.947Z")
 public class TypesIpfsPin   {
   
   private String cid = null;

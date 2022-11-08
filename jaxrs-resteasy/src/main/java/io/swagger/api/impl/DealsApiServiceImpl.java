@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @RequestScoped
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyServerCodegen", date = "2022-11-07T23:47:23.157Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyServerCodegen", date = "2022-11-07T23:55:56.083Z")
 public class DealsApiServiceImpl implements DealsApiService {
       public Response dealsFailuresGet(SecurityContext securityContext)
       throws NotFoundException {

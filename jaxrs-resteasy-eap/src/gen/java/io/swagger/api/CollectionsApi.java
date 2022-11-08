@@ -26,7 +26,7 @@ import javax.validation.constraints.*;
 
 
 @io.swagger.annotations.Api(description = "the collections API")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyEapServerCodegen", date = "2022-11-07T23:47:22.084Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyEapServerCodegen", date = "2022-11-07T23:55:53.947Z")
 public interface CollectionsApi  {
    
     @POST
