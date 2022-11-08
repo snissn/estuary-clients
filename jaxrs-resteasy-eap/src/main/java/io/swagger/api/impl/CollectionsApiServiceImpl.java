@@ -17,7 +17,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyEapServerCodegen", date = "2022-11-07T23:55:53.947Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyEapServerCodegen", date = "2022-11-08T01:04:05.765Z")
 public class CollectionsApiServiceImpl implements CollectionsApi {
       public Response collectionsColuuidCommitPost(String coluuid,SecurityContext securityContext) {
       // do some magic!

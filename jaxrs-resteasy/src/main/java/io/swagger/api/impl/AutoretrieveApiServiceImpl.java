@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @RequestScoped
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyServerCodegen", date = "2022-11-07T23:55:56.083Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyServerCodegen", date = "2022-11-08T01:04:06.346Z")
 public class AutoretrieveApiServiceImpl implements AutoretrieveApiService {
       public Response autoretrieveHeartbeatPost(String token,SecurityContext securityContext)
       throws NotFoundException {

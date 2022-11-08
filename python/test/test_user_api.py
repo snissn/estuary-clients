@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import estuary-client
-from estuary-client.api.user_api import UserApi  # noqa: E501
-from estuary-client.rest import ApiException
+import estuary_client
+from estuary_client.api.user_api import UserApi  # noqa: E501
+from estuary_client.rest import ApiException
 
 
 class TestUserApi(unittest.TestCase):
     """UserApi unit test stubs"""
 
     def setUp(self):
-        self.api = estuary-client.api.user_api.UserApi()  # noqa: E501
+        self.api = estuary_client.api.user_api.UserApi()  # noqa: E501
 
     def tearDown(self):
         pass
@@ -36,8 +36,8 @@ class TestUserApi(unittest.TestCase):
         """
         pass
 
-    def test_user_api_keys_key_delete(self):
-        """Test case for user_api_keys_key_delete
+    def test_user_api_keys_key_or_hash_delete(self):
+        """Test case for user_api_keys_key_or_hash_delete
 
         Revoke a User API Key.  # noqa: E501
         """

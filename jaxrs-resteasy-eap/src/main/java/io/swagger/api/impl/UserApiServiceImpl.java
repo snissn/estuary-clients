@@ -15,13 +15,13 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyEapServerCodegen", date = "2022-11-07T23:55:53.947Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyEapServerCodegen", date = "2022-11-08T01:04:05.765Z")
 public class UserApiServiceImpl implements UserApi {
       public Response userApiKeysGet(SecurityContext securityContext) {
       // do some magic!
       return Response.ok().build();
   }
-      public Response userApiKeysKeyDelete(String key,SecurityContext securityContext) {
+      public Response userApiKeysKeyOrHashDelete(String keyOrHash,SecurityContext securityContext) {
       // do some magic!
       return Response.ok().build();
   }

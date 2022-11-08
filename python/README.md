@@ -24,7 +24,7 @@ pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
 
 Then import the package:
 ```python
-import estuary-client 
+import estuary_client 
 ```
 
 ### Setuptools
@@ -38,7 +38,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import estuary-client
+import estuary_client
 ```
 
 ## Getting Started
@@ -48,18 +48,18 @@ Please follow the [installation procedure](#installation--usage) and then run th
 ```python
 from __future__ import print_function
 import time
-import estuary-client
-from estuary-client.rest import ApiException
+import estuary_client
+from estuary_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: bearerAuth
-configuration = estuary-client.Configuration()
+configuration = estuary_client.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = estuary-client.UserApi(estuary-client.ApiClient(configuration))
+api_instance = estuary_client.UserApi(estuary_client.ApiClient(configuration))
 
 try:
     # Get API keys for a user
@@ -77,7 +77,7 @@ All URIs are relative to *https://api.estuary.tech*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *UserApi* | [**user_api_keys_get**](docs/UserApi.md#user_api_keys_get) | **GET** /user/api-keys | Get API keys for a user
-*UserApi* | [**user_api_keys_key_delete**](docs/UserApi.md#user_api_keys_key_delete) | **DELETE** /user/api-keys/{key} | Revoke a User API Key.
+*UserApi* | [**user_api_keys_key_or_hash_delete**](docs/UserApi.md#user_api_keys_key_or_hash_delete) | **DELETE** /user/api-keys/{key_or_hash} | Revoke a User API Key.
 *UserApi* | [**user_api_keys_post**](docs/UserApi.md#user_api_keys_post) | **POST** /user/api-keys | Create API keys for a user
 *UserApi* | [**user_export_get**](docs/UserApi.md#user_export_get) | **GET** /user/export | Export user data
 *UserApi* | [**user_stats_get**](docs/UserApi.md#user_stats_get) | **GET** /user/stats | Create API keys for a user

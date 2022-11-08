@@ -13,7 +13,7 @@ import io.swagger.model.*;
 import io.swagger.model.TypesIpfsPin;
 import io.swagger.model.UtilHttpError;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaInflectorServerCodegen", date = "2022-11-07T23:55:53.923Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaInflectorServerCodegen", date = "2022-11-08T01:04:03.205Z")
 public class PinningController  {
   /** 
    * Uncomment and implement as you see fit.  These operations will map
