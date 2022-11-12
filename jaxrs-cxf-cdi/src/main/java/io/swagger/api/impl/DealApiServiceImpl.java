@@ -18,8 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @RequestScoped
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2022-11-12T00:50:17.260Z")
-public class DealApiServiceImpl implements DealApiService {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJAXRSCXFCDIServerCodegen", date = "2022-11-12T01:09:19.349Z[GMT]")public class DealApiServiceImpl implements DealApiService {
       @Override
       public Response dealEstimatePost(MainEstimateDealBody body, SecurityContext securityContext) {
       // do some magic!
@@ -56,7 +55,7 @@ public class DealApiServiceImpl implements DealApiService {
       return Response.ok().entity("magic!").build();
   }
       @Override
-      public Response dealTransferStatusPost(MainChannelIDParam chanid, SecurityContext securityContext) {
+      public Response dealTransferStatusPost(MainChannelIDParam body, SecurityContext securityContext) {
       // do some magic!
       return Response.ok().entity("magic!").build();
   }

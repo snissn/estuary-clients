@@ -3,7 +3,6 @@ package io.swagger.api.impl;
 import io.swagger.api.*;
 import io.swagger.model.*;
 
-
 import io.swagger.model.MainChannelIDParam;
 import io.swagger.model.MainEstimateDealBody;
 import io.swagger.model.UtilHttpError;
@@ -15,8 +14,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyEapServerCodegen", date = "2022-11-12T00:50:06.233Z")
-public class DealApiServiceImpl implements DealApi {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaResteasyEapServerCodegen", date = "2022-11-12T01:09:18.145Z[GMT]")public class DealApiServiceImpl implements DealApi {
       public Response dealEstimatePost(MainEstimateDealBody body,SecurityContext securityContext) {
       // do some magic!
       return Response.ok().build();
@@ -45,7 +43,7 @@ public class DealApiServiceImpl implements DealApi {
       // do some magic!
       return Response.ok().build();
   }
-      public Response dealTransferStatusPost(MainChannelIDParam chanid,SecurityContext securityContext) {
+      public Response dealTransferStatusPost(MainChannelIDParam body,SecurityContext securityContext) {
       // do some magic!
       return Response.ok().build();
   }

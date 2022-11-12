@@ -15,9 +15,8 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2022-11-12T00:50:17.260Z")
-public interface DealsApiService {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJAXRSCXFCDIServerCodegen", date = "2022-11-12T01:09:19.349Z[GMT]")public interface DealsApiService {
       public Response dealsFailuresGet(SecurityContext securityContext);
-      public Response dealsMakeMinerPost(String miner, String dealRequest, SecurityContext securityContext);
+      public Response dealsMakeMinerPost(String body, String miner, SecurityContext securityContext);
       public Response dealsStatusDealGet(Integer deal, SecurityContext securityContext);
 }

@@ -17,8 +17,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2022-11-12T00:50:17.260Z")
-public interface DealApiService {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJAXRSCXFCDIServerCodegen", date = "2022-11-12T01:09:19.349Z[GMT]")public interface DealApiService {
       public Response dealEstimatePost(MainEstimateDealBody body, SecurityContext securityContext);
       public Response dealInfoDealidGet(Integer dealid, SecurityContext securityContext);
       public Response dealProposalPropcidGet(String propcid, SecurityContext securityContext);
@@ -26,5 +25,5 @@ public interface DealApiService {
       public Response dealStatusByProposalPropcidGet(String propcid, SecurityContext securityContext);
       public Response dealStatusMinerPropcidGet(String miner, String propcid, SecurityContext securityContext);
       public Response dealTransferInProgressGet(SecurityContext securityContext);
-      public Response dealTransferStatusPost(MainChannelIDParam chanid, SecurityContext securityContext);
+      public Response dealTransferStatusPost(MainChannelIDParam body, SecurityContext securityContext);
 }

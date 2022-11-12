@@ -3,7 +3,6 @@ package io.swagger.api.impl;
 import io.swagger.api.*;
 import io.swagger.model.*;
 
-
 import io.swagger.model.UtilHttpError;
 
 import java.util.List;
@@ -16,8 +15,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @RequestScoped
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyServerCodegen", date = "2022-11-12T00:50:06.027Z")
-public class NetApiServiceImpl implements NetApiService {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaResteasyServerCodegen", date = "2022-11-12T01:09:17.308Z[GMT]")public class NetApiServiceImpl implements NetApiService {
       public Response netAddrsGet(SecurityContext securityContext)
       throws NotFoundException {
       // do some magic!

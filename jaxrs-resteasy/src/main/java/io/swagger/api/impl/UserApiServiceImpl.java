@@ -3,8 +3,6 @@ package io.swagger.api.impl;
 import io.swagger.api.*;
 import io.swagger.model.*;
 
-
-import java.util.List;
 import io.swagger.model.MainGetApiKeysResp;
 import io.swagger.model.UtilHttpError;
 
@@ -18,8 +16,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @RequestScoped
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyServerCodegen", date = "2022-11-12T00:50:06.027Z")
-public class UserApiServiceImpl implements UserApiService {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaResteasyServerCodegen", date = "2022-11-12T01:09:17.308Z[GMT]")public class UserApiServiceImpl implements UserApiService {
       public Response userApiKeysGet(SecurityContext securityContext)
       throws NotFoundException {
       // do some magic!
