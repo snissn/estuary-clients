@@ -162,6 +162,10 @@ operation_parameters_minimum_occurrences["adminPeeringPeersDelete:::peerIds"]=1
 operation_parameters_minimum_occurrences["pinningPinsPinidDelete:::pinid"]=1
 operation_parameters_minimum_occurrences["pinningPinsPinidGet:::pinid"]=1
 operation_parameters_minimum_occurrences["pinningPinsPinidPost:::pinid"]=1
+operation_parameters_minimum_occurrences["pinningPinsPinidPost:::cid"]=1
+operation_parameters_minimum_occurrences["pinningPinsPinidPost:::name"]=0
+operation_parameters_minimum_occurrences["pinningPinsPinidPost:::origins"]=0
+operation_parameters_minimum_occurrences["pinningPinsPinidPost:::meta"]=0
 operation_parameters_minimum_occurrences["pinningPinsPost:::pin"]=1
 operation_parameters_minimum_occurrences["publicByCidCidGet:::cid"]=1
 operation_parameters_minimum_occurrences["publicMinersDealsMinerGet:::miner"]=1
@@ -246,6 +250,10 @@ operation_parameters_maximum_occurrences["adminPeeringPeersDelete:::peerIds"]=0
 operation_parameters_maximum_occurrences["pinningPinsPinidDelete:::pinid"]=0
 operation_parameters_maximum_occurrences["pinningPinsPinidGet:::pinid"]=0
 operation_parameters_maximum_occurrences["pinningPinsPinidPost:::pinid"]=0
+operation_parameters_maximum_occurrences["pinningPinsPinidPost:::cid"]=0
+operation_parameters_maximum_occurrences["pinningPinsPinidPost:::name"]=0
+operation_parameters_maximum_occurrences["pinningPinsPinidPost:::origins"]=0
+operation_parameters_maximum_occurrences["pinningPinsPinidPost:::meta"]=0
 operation_parameters_maximum_occurrences["pinningPinsPost:::pin"]=0
 operation_parameters_maximum_occurrences["publicByCidCidGet:::cid"]=0
 operation_parameters_maximum_occurrences["publicMinersDealsMinerGet:::miner"]=0
@@ -327,6 +335,10 @@ operation_parameters_collection_type["adminPeeringPeersDelete:::peerIds"]=
 operation_parameters_collection_type["pinningPinsPinidDelete:::pinid"]=""
 operation_parameters_collection_type["pinningPinsPinidGet:::pinid"]=""
 operation_parameters_collection_type["pinningPinsPinidPost:::pinid"]=""
+operation_parameters_collection_type["pinningPinsPinidPost:::cid"]=""
+operation_parameters_collection_type["pinningPinsPinidPost:::name"]=""
+operation_parameters_collection_type["pinningPinsPinidPost:::origins"]=""
+operation_parameters_collection_type["pinningPinsPinidPost:::meta"]=""
 operation_parameters_collection_type["pinningPinsPost:::pin"]=""
 operation_parameters_collection_type["publicByCidCidGet:::cid"]=""
 operation_parameters_collection_type["publicMinersDealsMinerGet:::miner"]=""
@@ -2450,8 +2462,6 @@ print_pinningPinsGet_help() {
     echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
     code=400
     echo -e "${result_color_table[${code:0:1}]}  400;Bad Request${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
-    code=404
-    echo -e "${result_color_table[${code:0:1}]}  404;Not Found${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
     code=500
     echo -e "${result_color_table[${code:0:1}]}  500;Internal Server Error${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
 }
@@ -2470,10 +2480,8 @@ print_pinningPinsPinidDelete_help() {
     echo -e "  * ${GREEN}pinid${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - Pin ID ${YELLOW}Specify as: pinid=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
-    code=200
-    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
-    code=400
-    echo -e "${result_color_table[${code:0:1}]}  400;Bad Request${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=202
+    echo -e "${result_color_table[${code:0:1}]}  202;${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
     code=500
     echo -e "${result_color_table[${code:0:1}]}  500;Internal Server Error${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
 }
@@ -2494,8 +2502,8 @@ print_pinningPinsPinidGet_help() {
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=200
     echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
-    code=400
-    echo -e "${result_color_table[${code:0:1}]}  400;Bad Request${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=404
+    echo -e "${result_color_table[${code:0:1}]}  404;Not Found${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
     code=500
     echo -e "${result_color_table[${code:0:1}]}  500;Internal Server Error${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
 }
@@ -2512,12 +2520,20 @@ print_pinningPinsPinidPost_help() {
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}pinid${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - Pin ID ${YELLOW}Specify as: pinid=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}body${OFF} ${BLUE}[]${OFF} ${RED}(required)${OFF}${OFF} - CID of new pin" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "  * ${GREEN}body${OFF} ${BLUE}[]${OFF}${OFF} - Name (filename) of new pin" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "  * ${GREEN}body${OFF} ${BLUE}[]${OFF}${OFF} - Origins of new pin" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "  * ${GREEN}body${OFF} ${BLUE}[]${OFF}${OFF} - Meta information of new pin" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
-    code=200
-    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
-    code=400
-    echo -e "${result_color_table[${code:0:1}]}  400;Bad Request${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=202
+    echo -e "${result_color_table[${code:0:1}]}  202;Accepted${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=404
+    echo -e "${result_color_table[${code:0:1}]}  404;Not Found${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
     code=500
     echo -e "${result_color_table[${code:0:1}]}  500;Internal Server Error${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
 }
@@ -2537,10 +2553,8 @@ print_pinningPinsPost_help() {
     echo -e ""
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
-    code=200
-    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
-    code=400
-    echo -e "${result_color_table[${code:0:1}]}  400;Bad Request${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=202
+    echo -e "${result_color_table[${code:0:1}]}  202;Accepted${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
     code=500
     echo -e "${result_color_table[${code:0:1}]}  500;Internal Server Error${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
 }
@@ -5922,10 +5936,43 @@ call_pinningPinsPinidPost() {
     if [[ -n $basic_auth_credential ]]; then
         basic_auth_option="-u ${basic_auth_credential}"
     fi
-    if [[ "$print_curl" = true ]]; then
-        echo "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    local body_json_curl=""
+
+    #
+    # Check if the user provided 'Content-type' headers in the
+    # command line. If not try to set them based on the Swagger specification
+    # if values produces and consumes are defined unambigously
+    #
+
+
+    if [[ -z $header_content_type && "$force" = false ]]; then
+        :
     else
-        eval "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+        headers_curl="${headers_curl} -H 'Content-type: ${header_content_type}'"
+    fi
+
+
+    #
+    # If we have received some body content over pipe, pass it from the
+    # temporary file to cURL
+    #
+    if [[ -n $body_content_temp_file ]]; then
+        if [[ "$print_curl" = true ]]; then
+            echo "cat ${body_content_temp_file} | curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\" -d @-"
+        else
+            eval "cat ${body_content_temp_file} | curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\" -d @-"
+        fi
+        rm "${body_content_temp_file}"
+    #
+    # If not, try to build the content body from arguments KEY==VALUE and KEY:=VALUE
+    #
+    else
+        body_json_curl=$(body_parameters_to_json)
+        if [[ "$print_curl" = true ]]; then
+            echo "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} ${body_json_curl} \"${host}${path}\""
+        else
+            eval "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} ${body_json_curl} \"${host}${path}\""
+        fi
     fi
 }
 

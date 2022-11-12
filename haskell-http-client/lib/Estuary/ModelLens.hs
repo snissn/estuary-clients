@@ -172,10 +172,10 @@ mainImportDealBodyColuuidL :: Lens_' MainImportDealBody (Maybe Text)
 mainImportDealBodyColuuidL f MainImportDealBody{..} = (\mainImportDealBodyColuuid -> MainImportDealBody { mainImportDealBodyColuuid, ..} ) <$> f mainImportDealBodyColuuid
 {-# INLINE mainImportDealBodyColuuidL #-}
 
--- | 'mainImportDealBodyDealIDs' Lens
-mainImportDealBodyDealIDsL :: Lens_' MainImportDealBody (Maybe [Int])
-mainImportDealBodyDealIDsL f MainImportDealBody{..} = (\mainImportDealBodyDealIDs -> MainImportDealBody { mainImportDealBodyDealIDs, ..} ) <$> f mainImportDealBodyDealIDs
-{-# INLINE mainImportDealBodyDealIDsL #-}
+-- | 'mainImportDealBodyDealIds' Lens
+mainImportDealBodyDealIdsL :: Lens_' MainImportDealBody (Maybe [Int])
+mainImportDealBodyDealIdsL f MainImportDealBody{..} = (\mainImportDealBodyDealIds -> MainImportDealBody { mainImportDealBodyDealIds, ..} ) <$> f mainImportDealBodyDealIds
+{-# INLINE mainImportDealBodyDealIdsL #-}
 
 -- | 'mainImportDealBodyDir' Lens
 mainImportDealBodyDirL :: Lens_' MainImportDealBody (Maybe Text)
@@ -186,6 +186,20 @@ mainImportDealBodyDirL f MainImportDealBody{..} = (\mainImportDealBodyDir -> Mai
 mainImportDealBodyNameL :: Lens_' MainImportDealBody (Maybe Text)
 mainImportDealBodyNameL f MainImportDealBody{..} = (\mainImportDealBodyName -> MainImportDealBody { mainImportDealBodyName, ..} ) <$> f mainImportDealBodyName
 {-# INLINE mainImportDealBodyNameL #-}
+
+
+
+-- * TypesIpfsListPinStatusResponse
+
+-- | 'typesIpfsListPinStatusResponseCount' Lens
+typesIpfsListPinStatusResponseCountL :: Lens_' TypesIpfsListPinStatusResponse (Maybe Int)
+typesIpfsListPinStatusResponseCountL f TypesIpfsListPinStatusResponse{..} = (\typesIpfsListPinStatusResponseCount -> TypesIpfsListPinStatusResponse { typesIpfsListPinStatusResponseCount, ..} ) <$> f typesIpfsListPinStatusResponseCount
+{-# INLINE typesIpfsListPinStatusResponseCountL #-}
+
+-- | 'typesIpfsListPinStatusResponseResults' Lens
+typesIpfsListPinStatusResponseResultsL :: Lens_' TypesIpfsListPinStatusResponse (Maybe [TypesIpfsPinStatusResponse])
+typesIpfsListPinStatusResponseResultsL f TypesIpfsListPinStatusResponse{..} = (\typesIpfsListPinStatusResponseResults -> TypesIpfsListPinStatusResponse { typesIpfsListPinStatusResponseResults, ..} ) <$> f typesIpfsListPinStatusResponseResults
+{-# INLINE typesIpfsListPinStatusResponseResultsL #-}
 
 
 
@@ -210,6 +224,40 @@ typesIpfsPinNameL f TypesIpfsPin{..} = (\typesIpfsPinName -> TypesIpfsPin { type
 typesIpfsPinOriginsL :: Lens_' TypesIpfsPin (Maybe [Text])
 typesIpfsPinOriginsL f TypesIpfsPin{..} = (\typesIpfsPinOrigins -> TypesIpfsPin { typesIpfsPinOrigins, ..} ) <$> f typesIpfsPinOrigins
 {-# INLINE typesIpfsPinOriginsL #-}
+
+
+
+-- * TypesIpfsPinStatusResponse
+
+-- | 'typesIpfsPinStatusResponseCreated' Lens
+typesIpfsPinStatusResponseCreatedL :: Lens_' TypesIpfsPinStatusResponse (Maybe Text)
+typesIpfsPinStatusResponseCreatedL f TypesIpfsPinStatusResponse{..} = (\typesIpfsPinStatusResponseCreated -> TypesIpfsPinStatusResponse { typesIpfsPinStatusResponseCreated, ..} ) <$> f typesIpfsPinStatusResponseCreated
+{-# INLINE typesIpfsPinStatusResponseCreatedL #-}
+
+-- | 'typesIpfsPinStatusResponseDelegates' Lens
+typesIpfsPinStatusResponseDelegatesL :: Lens_' TypesIpfsPinStatusResponse (Maybe [Text])
+typesIpfsPinStatusResponseDelegatesL f TypesIpfsPinStatusResponse{..} = (\typesIpfsPinStatusResponseDelegates -> TypesIpfsPinStatusResponse { typesIpfsPinStatusResponseDelegates, ..} ) <$> f typesIpfsPinStatusResponseDelegates
+{-# INLINE typesIpfsPinStatusResponseDelegatesL #-}
+
+-- | 'typesIpfsPinStatusResponseInfo' Lens
+typesIpfsPinStatusResponseInfoL :: Lens_' TypesIpfsPinStatusResponse (Maybe A.Value)
+typesIpfsPinStatusResponseInfoL f TypesIpfsPinStatusResponse{..} = (\typesIpfsPinStatusResponseInfo -> TypesIpfsPinStatusResponse { typesIpfsPinStatusResponseInfo, ..} ) <$> f typesIpfsPinStatusResponseInfo
+{-# INLINE typesIpfsPinStatusResponseInfoL #-}
+
+-- | 'typesIpfsPinStatusResponsePin' Lens
+typesIpfsPinStatusResponsePinL :: Lens_' TypesIpfsPinStatusResponse (Maybe TypesIpfsPin)
+typesIpfsPinStatusResponsePinL f TypesIpfsPinStatusResponse{..} = (\typesIpfsPinStatusResponsePin -> TypesIpfsPinStatusResponse { typesIpfsPinStatusResponsePin, ..} ) <$> f typesIpfsPinStatusResponsePin
+{-# INLINE typesIpfsPinStatusResponsePinL #-}
+
+-- | 'typesIpfsPinStatusResponseRequestid' Lens
+typesIpfsPinStatusResponseRequestidL :: Lens_' TypesIpfsPinStatusResponse (Maybe Text)
+typesIpfsPinStatusResponseRequestidL f TypesIpfsPinStatusResponse{..} = (\typesIpfsPinStatusResponseRequestid -> TypesIpfsPinStatusResponse { typesIpfsPinStatusResponseRequestid, ..} ) <$> f typesIpfsPinStatusResponseRequestid
+{-# INLINE typesIpfsPinStatusResponseRequestidL #-}
+
+-- | 'typesIpfsPinStatusResponseStatus' Lens
+typesIpfsPinStatusResponseStatusL :: Lens_' TypesIpfsPinStatusResponse (Maybe Text)
+typesIpfsPinStatusResponseStatusL f TypesIpfsPinStatusResponse{..} = (\typesIpfsPinStatusResponseStatus -> TypesIpfsPinStatusResponse { typesIpfsPinStatusResponseStatus, ..} ) <$> f typesIpfsPinStatusResponseStatus
+{-# INLINE typesIpfsPinStatusResponseStatusL #-}
 
 
 

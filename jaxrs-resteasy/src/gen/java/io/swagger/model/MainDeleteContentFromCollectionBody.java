@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 import io.swagger.annotations.*;
 
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyServerCodegen", date = "2022-11-08T02:39:39.878Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaResteasyServerCodegen", date = "2022-11-12T00:50:06.027Z")
 public class MainDeleteContentFromCollectionBody   {
   
   private String by = null;

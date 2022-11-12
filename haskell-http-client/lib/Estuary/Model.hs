@@ -78,8 +78,8 @@ newtype Begin = Begin { unBegin :: Text } deriving (P.Eq, P.Show)
 -- ** Body2
 newtype Body2 = Body2 { unBody2 :: Text } deriving (P.Eq, P.Show, A.ToJSON)
 
--- ** Cid
-newtype Cid = Cid { unCid :: Text } deriving (P.Eq, P.Show)
+-- ** Cid2
+newtype Cid2 = Cid2 { unCid2 :: Text } deriving (P.Eq, P.Show)
 
 -- ** Coluuid
 newtype Coluuid = Coluuid { unColuuid :: Text } deriving (P.Eq, P.Show)
@@ -90,8 +90,8 @@ newtype Cont = Cont { unCont :: Text } deriving (P.Eq, P.Show)
 -- ** Content
 newtype Content = Content { unContent :: Text } deriving (P.Eq, P.Show)
 
--- ** ContentIDs
-newtype ContentIDs = ContentIDs { unContentIDs :: [Int] } deriving (P.Eq, P.Show, A.ToJSON)
+-- ** ContentIds
+newtype ContentIds = ContentIds { unContentIds :: [Int] } deriving (P.Eq, P.Show, A.ToJSON)
 
 -- ** Contentid
 newtype Contentid = Contentid { unContentid :: Text } deriving (P.Eq, P.Show)
@@ -141,14 +141,23 @@ newtype Limit = Limit { unLimit :: Int } deriving (P.Eq, P.Show)
 -- ** LimitText
 newtype LimitText = LimitText { unLimitText :: Text } deriving (P.Eq, P.Show)
 
+-- ** Meta2
+newtype Meta2 = Meta2 { unMeta2 :: Text } deriving (P.Eq, P.Show, A.ToJSON)
+
 -- ** Miner
 newtype Miner = Miner { unMiner :: Text } deriving (P.Eq, P.Show)
+
+-- ** Name2
+newtype Name2 = Name2 { unName2 :: Text } deriving (P.Eq, P.Show, A.ToJSON)
 
 -- ** Offset
 newtype Offset = Offset { unOffset :: Int } deriving (P.Eq, P.Show)
 
 -- ** OffsetText
 newtype OffsetText = OffsetText { unOffsetText :: Text } deriving (P.Eq, P.Show)
+
+-- ** Origins2
+newtype Origins2 = Origins2 { unOrigins2 :: Text } deriving (P.Eq, P.Show, A.ToJSON)
 
 -- ** ParamData
 newtype ParamData = ParamData { unParamData :: FilePath } deriving (P.Eq, P.Show)
@@ -412,7 +421,7 @@ mkMainGetApiKeysResp =
 -- | MainImportDealBody
 data MainImportDealBody = MainImportDealBody
   { mainImportDealBodyColuuid :: !(Maybe Text) -- ^ "coluuid"
-  , mainImportDealBodyDealIDs :: !(Maybe [Int]) -- ^ "dealIDs"
+  , mainImportDealBodyDealIds :: !(Maybe [Int]) -- ^ "dealIDs"
   , mainImportDealBodyDir :: !(Maybe Text) -- ^ "dir"
   , mainImportDealBodyName :: !(Maybe Text) -- ^ "name"
   } deriving (P.Show, P.Eq, P.Typeable)
@@ -431,7 +440,7 @@ instance A.ToJSON MainImportDealBody where
   toJSON MainImportDealBody {..} =
    _omitNulls
       [ "coluuid" .= mainImportDealBodyColuuid
-      , "dealIDs" .= mainImportDealBodyDealIDs
+      , "dealIDs" .= mainImportDealBodyDealIds
       , "dir" .= mainImportDealBodyDir
       , "name" .= mainImportDealBodyName
       ]
@@ -443,9 +452,41 @@ mkMainImportDealBody
 mkMainImportDealBody =
   MainImportDealBody
   { mainImportDealBodyColuuid = Nothing
-  , mainImportDealBodyDealIDs = Nothing
+  , mainImportDealBodyDealIds = Nothing
   , mainImportDealBodyDir = Nothing
   , mainImportDealBodyName = Nothing
+  }
+
+-- ** TypesIpfsListPinStatusResponse
+-- | TypesIpfsListPinStatusResponse
+data TypesIpfsListPinStatusResponse = TypesIpfsListPinStatusResponse
+  { typesIpfsListPinStatusResponseCount :: !(Maybe Int) -- ^ "count"
+  , typesIpfsListPinStatusResponseResults :: !(Maybe [TypesIpfsPinStatusResponse]) -- ^ "results"
+  } deriving (P.Show, P.Eq, P.Typeable)
+
+-- | FromJSON TypesIpfsListPinStatusResponse
+instance A.FromJSON TypesIpfsListPinStatusResponse where
+  parseJSON = A.withObject "TypesIpfsListPinStatusResponse" $ \o ->
+    TypesIpfsListPinStatusResponse
+      <$> (o .:? "count")
+      <*> (o .:? "results")
+
+-- | ToJSON TypesIpfsListPinStatusResponse
+instance A.ToJSON TypesIpfsListPinStatusResponse where
+  toJSON TypesIpfsListPinStatusResponse {..} =
+   _omitNulls
+      [ "count" .= typesIpfsListPinStatusResponseCount
+      , "results" .= typesIpfsListPinStatusResponseResults
+      ]
+
+
+-- | Construct a value of type 'TypesIpfsListPinStatusResponse' (by applying it's required fields, if any)
+mkTypesIpfsListPinStatusResponse
+  :: TypesIpfsListPinStatusResponse
+mkTypesIpfsListPinStatusResponse =
+  TypesIpfsListPinStatusResponse
+  { typesIpfsListPinStatusResponseCount = Nothing
+  , typesIpfsListPinStatusResponseResults = Nothing
   }
 
 -- ** TypesIpfsPin
@@ -486,6 +527,54 @@ mkTypesIpfsPin =
   , typesIpfsPinMeta = Nothing
   , typesIpfsPinName = Nothing
   , typesIpfsPinOrigins = Nothing
+  }
+
+-- ** TypesIpfsPinStatusResponse
+-- | TypesIpfsPinStatusResponse
+data TypesIpfsPinStatusResponse = TypesIpfsPinStatusResponse
+  { typesIpfsPinStatusResponseCreated :: !(Maybe Text) -- ^ "created"
+  , typesIpfsPinStatusResponseDelegates :: !(Maybe [Text]) -- ^ "delegates"
+  , typesIpfsPinStatusResponseInfo :: !(Maybe A.Value) -- ^ "info"
+  , typesIpfsPinStatusResponsePin :: !(Maybe TypesIpfsPin) -- ^ "pin"
+  , typesIpfsPinStatusResponseRequestid :: !(Maybe Text) -- ^ "requestid"
+  , typesIpfsPinStatusResponseStatus :: !(Maybe Text) -- ^ "status"
+  } deriving (P.Show, P.Eq, P.Typeable)
+
+-- | FromJSON TypesIpfsPinStatusResponse
+instance A.FromJSON TypesIpfsPinStatusResponse where
+  parseJSON = A.withObject "TypesIpfsPinStatusResponse" $ \o ->
+    TypesIpfsPinStatusResponse
+      <$> (o .:? "created")
+      <*> (o .:? "delegates")
+      <*> (o .:? "info")
+      <*> (o .:? "pin")
+      <*> (o .:? "requestid")
+      <*> (o .:? "status")
+
+-- | ToJSON TypesIpfsPinStatusResponse
+instance A.ToJSON TypesIpfsPinStatusResponse where
+  toJSON TypesIpfsPinStatusResponse {..} =
+   _omitNulls
+      [ "created" .= typesIpfsPinStatusResponseCreated
+      , "delegates" .= typesIpfsPinStatusResponseDelegates
+      , "info" .= typesIpfsPinStatusResponseInfo
+      , "pin" .= typesIpfsPinStatusResponsePin
+      , "requestid" .= typesIpfsPinStatusResponseRequestid
+      , "status" .= typesIpfsPinStatusResponseStatus
+      ]
+
+
+-- | Construct a value of type 'TypesIpfsPinStatusResponse' (by applying it's required fields, if any)
+mkTypesIpfsPinStatusResponse
+  :: TypesIpfsPinStatusResponse
+mkTypesIpfsPinStatusResponse =
+  TypesIpfsPinStatusResponse
+  { typesIpfsPinStatusResponseCreated = Nothing
+  , typesIpfsPinStatusResponseDelegates = Nothing
+  , typesIpfsPinStatusResponseInfo = Nothing
+  , typesIpfsPinStatusResponsePin = Nothing
+  , typesIpfsPinStatusResponseRequestid = Nothing
+  , typesIpfsPinStatusResponseStatus = Nothing
   }
 
 -- ** UtilContentAddIpfsBody

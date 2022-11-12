@@ -5,7 +5,9 @@ import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
 import io.swagger.api.ApiUtils
 
+import io.swagger.model.TypesIpfsListPinStatusResponse
 import io.swagger.model.TypesIpfsPin
+import io.swagger.model.TypesIpfsPinStatusResponse
 import io.swagger.model.UtilHttpError
 
 import java.util.*;
@@ -30,7 +32,7 @@ class PinningApi {
 
         invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
                     "GET", "",
-                    String.class )
+                    TypesIpfsListPinStatusResponse.class )
                     
     }
     def pinningPinsPinidDelete ( String pinid, Closure onSuccess, Closure onFailure)  {
@@ -52,7 +54,7 @@ class PinningApi {
 
         invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
                     "DELETE", "",
-                    String.class )
+                    null )
                     
     }
     def pinningPinsPinidGet ( String pinid, Closure onSuccess, Closure onFailure)  {
@@ -74,10 +76,10 @@ class PinningApi {
 
         invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
                     "GET", "",
-                    String.class )
+                    TypesIpfsPinStatusResponse.class )
                     
     }
-    def pinningPinsPinidPost ( String pinid, Closure onSuccess, Closure onFailure)  {
+    def pinningPinsPinidPost ( String pinid, String cid, String name, String origins, String meta, Closure onSuccess, Closure onFailure)  {
         // create path and map path parameters (TODO)
         String resourcePath = "/pinning/pins/{pinid}"
 
@@ -89,6 +91,10 @@ class PinningApi {
         if (pinid == null) {
             throw new RuntimeException("missing required params pinid")
         }
+        // verify required params are set
+        if (cid == null) {
+            throw new RuntimeException("missing required params cid")
+        }
 
         
 
@@ -96,7 +102,7 @@ class PinningApi {
 
         invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
                     "POST", "",
-                    String.class )
+                    TypesIpfsPinStatusResponse.class )
                     
     }
     def pinningPinsPost ( TypesIpfsPin pin, Closure onSuccess, Closure onFailure)  {
@@ -118,7 +124,7 @@ class PinningApi {
 
         invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
                     "POST", "",
-                    String.class )
+                    TypesIpfsPinStatusResponse.class )
                     
     }
 }

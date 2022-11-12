@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **PinningPinsGet**
-> string PinningPinsGet(ctx, )
+> TypesIpfsListPinStatusResponse PinningPinsGet(ctx, )
 List all pin status objects
 
 This endpoint lists all pin status objects
@@ -22,7 +22,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**string**
+[**TypesIpfsListPinStatusResponse**](types.IpfsListPinStatusResponse.md)
 
 ### Authorization
 
@@ -36,7 +36,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **PinningPinsPinidDelete**
-> string PinningPinsPinidDelete(ctx, pinid)
+> PinningPinsPinidDelete(ctx, pinid)
 Delete a pinned object
 
 This endpoint deletes a pinned object.
@@ -50,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+ (empty response body)
 
 ### Authorization
 
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **PinningPinsPinidGet**
-> string PinningPinsPinidGet(ctx, pinid)
+> TypesIpfsPinStatusResponse PinningPinsPinidGet(ctx, pinid)
 Get a pin status object
 
 This endpoint returns a pin status object.
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**TypesIpfsPinStatusResponse**](types.IpfsPinStatusResponse.md)
 
 ### Authorization
 
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **PinningPinsPinidPost**
-> string PinningPinsPinidPost(ctx, pinid)
+> TypesIpfsPinStatusResponse PinningPinsPinidPost(ctx, pinid, cid, optional)
 Replace a pinned object
 
 This endpoint replaces a pinned object.
@@ -103,10 +103,23 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **pinid** | **string**| Pin ID | 
+  **cid** | **string**| CID of new pin | 
+ **optional** | ***PinningApiPinningPinsPinidPostOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PinningApiPinningPinsPinidPostOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **name** | **optional.String**| Name (filename) of new pin | 
+ **origins** | **optional.String**| Origins of new pin | 
+ **meta** | **optional.String**| Meta information of new pin | 
 
 ### Return type
 
-**string**
+[**TypesIpfsPinStatusResponse**](types.IpfsPinStatusResponse.md)
 
 ### Authorization
 
@@ -120,7 +133,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **PinningPinsPost**
-> string PinningPinsPost(ctx, pin)
+> TypesIpfsPinStatusResponse PinningPinsPost(ctx, pin)
 Add and pin object
 
 This endpoint adds a pin to the IPFS daemon.
@@ -134,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**TypesIpfsPinStatusResponse**](types.IpfsPinStatusResponse.md)
 
 ### Authorization
 

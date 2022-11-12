@@ -59,10 +59,10 @@ sub new {
     __PACKAGE__->method_documentation->{ 'pinning_pins_get' } = { 
     	summary => 'List all pin status objects',
         params => $params,
-        returns => 'string',
+        returns => 'TypesIpfsListPinStatusResponse',
         };
 }
-# @return string
+# @return TypesIpfsListPinStatusResponse
 #
 sub pinning_pins_get {
     my ($self, %args) = @_;
@@ -93,7 +93,7 @@ sub pinning_pins_get {
     if (!$response) {
         return;
     }
-    my $_response_object = $self->{api_client}->deserialize('string', $response);
+    my $_response_object = $self->{api_client}->deserialize('TypesIpfsListPinStatusResponse', $response);
     return $_response_object;
 }
 
@@ -114,10 +114,10 @@ sub pinning_pins_get {
     __PACKAGE__->method_documentation->{ 'pinning_pins_pinid_delete' } = { 
     	summary => 'Delete a pinned object',
         params => $params,
-        returns => 'string',
+        returns => undef,
         };
 }
-# @return string
+# @return void
 #
 sub pinning_pins_pinid_delete {
     my ($self, %args) = @_;
@@ -154,14 +154,10 @@ sub pinning_pins_pinid_delete {
     my $auth_settings = [qw(bearerAuth )];
 
     # make the API Call
-    my $response = $self->{api_client}->call_api($_resource_path, $_method,
+    $self->{api_client}->call_api($_resource_path, $_method,
                                            $query_params, $form_params,
                                            $header_params, $_body_data, $auth_settings);
-    if (!$response) {
-        return;
-    }
-    my $_response_object = $self->{api_client}->deserialize('string', $response);
-    return $_response_object;
+    return;
 }
 
 #
@@ -181,10 +177,10 @@ sub pinning_pins_pinid_delete {
     __PACKAGE__->method_documentation->{ 'pinning_pins_pinid_get' } = { 
     	summary => 'Get a pin status object',
         params => $params,
-        returns => 'string',
+        returns => 'TypesIpfsPinStatusResponse',
         };
 }
-# @return string
+# @return TypesIpfsPinStatusResponse
 #
 sub pinning_pins_pinid_get {
     my ($self, %args) = @_;
@@ -227,7 +223,7 @@ sub pinning_pins_pinid_get {
     if (!$response) {
         return;
     }
-    my $_response_object = $self->{api_client}->deserialize('string', $response);
+    my $_response_object = $self->{api_client}->deserialize('TypesIpfsPinStatusResponse', $response);
     return $_response_object;
 }
 
@@ -237,6 +233,10 @@ sub pinning_pins_pinid_get {
 # Replace a pinned object
 # 
 # @param string $pinid Pin ID (required)
+# @param string $cid CID of new pin (required)
+# @param string $name Name (filename) of new pin (optional)
+# @param string $origins Origins of new pin (optional)
+# @param string $meta Meta information of new pin (optional)
 {
     my $params = {
     'pinid' => {
@@ -244,14 +244,34 @@ sub pinning_pins_pinid_get {
         description => 'Pin ID',
         required => '1',
     },
+    'cid' => {
+        data_type => 'string',
+        description => 'CID of new pin',
+        required => '1',
+    },
+    'name' => {
+        data_type => 'string',
+        description => 'Name (filename) of new pin',
+        required => '0',
+    },
+    'origins' => {
+        data_type => 'string',
+        description => 'Origins of new pin',
+        required => '0',
+    },
+    'meta' => {
+        data_type => 'string',
+        description => 'Meta information of new pin',
+        required => '0',
+    },
     };
     __PACKAGE__->method_documentation->{ 'pinning_pins_pinid_post' } = { 
     	summary => 'Replace a pinned object',
         params => $params,
-        returns => 'string',
+        returns => 'TypesIpfsPinStatusResponse',
         };
 }
-# @return string
+# @return TypesIpfsPinStatusResponse
 #
 sub pinning_pins_pinid_post {
     my ($self, %args) = @_;
@@ -259,6 +279,11 @@ sub pinning_pins_pinid_post {
     # verify the required parameter 'pinid' is set
     unless (exists $args{'pinid'}) {
       croak("Missing the required parameter 'pinid' when calling pinning_pins_pinid_post");
+    }
+
+    # verify the required parameter 'cid' is set
+    unless (exists $args{'cid'}) {
+      croak("Missing the required parameter 'cid' when calling pinning_pins_pinid_post");
     }
 
     # parse inputs
@@ -284,6 +309,26 @@ sub pinning_pins_pinid_post {
     }
 
     my $_body_data;
+    # body params
+    if ( exists $args{'cid'}) {
+        $_body_data = $args{'cid'};
+    }
+
+    # body params
+    if ( exists $args{'name'}) {
+        $_body_data = $args{'name'};
+    }
+
+    # body params
+    if ( exists $args{'origins'}) {
+        $_body_data = $args{'origins'};
+    }
+
+    # body params
+    if ( exists $args{'meta'}) {
+        $_body_data = $args{'meta'};
+    }
+
     # authentication setting, if any
     my $auth_settings = [qw(bearerAuth )];
 
@@ -294,7 +339,7 @@ sub pinning_pins_pinid_post {
     if (!$response) {
         return;
     }
-    my $_response_object = $self->{api_client}->deserialize('string', $response);
+    my $_response_object = $self->{api_client}->deserialize('TypesIpfsPinStatusResponse', $response);
     return $_response_object;
 }
 
@@ -315,10 +360,10 @@ sub pinning_pins_pinid_post {
     __PACKAGE__->method_documentation->{ 'pinning_pins_post' } = { 
     	summary => 'Add and pin object',
         params => $params,
-        returns => 'string',
+        returns => 'TypesIpfsPinStatusResponse',
         };
 }
-# @return string
+# @return TypesIpfsPinStatusResponse
 #
 sub pinning_pins_post {
     my ($self, %args) = @_;
@@ -359,7 +404,7 @@ sub pinning_pins_post {
     if (!$response) {
         return;
     }
-    my $_response_object = $self->{api_client}->deserialize('string', $response);
+    my $_response_object = $self->{api_client}->deserialize('TypesIpfsPinStatusResponse', $response);
     return $_response_object;
 }
 

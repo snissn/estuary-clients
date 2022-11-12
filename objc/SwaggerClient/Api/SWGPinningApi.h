@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
+#import "SWGTypesIpfsListPinStatusResponse.h"
 #import "SWGTypesIpfsPin.h"
+#import "SWGTypesIpfsPinStatusResponse.h"
 #import "SWGUtilHttpError.h"
 #import "SWGApi.h"
 
@@ -30,12 +32,11 @@ extern NSInteger kSWGPinningApiMissingParamErrorCode;
 /// 
 ///  code:200 message:"OK",
 ///  code:400 message:"Bad Request",
-///  code:404 message:"Not Found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return NSString*
+/// @return SWGTypesIpfsListPinStatusResponse*
 -(NSURLSessionTask*) pinningPinsGetWithCompletionHandler: 
-    (void (^)(NSString* output, NSError* error)) handler;
+    (void (^)(SWGTypesIpfsListPinStatusResponse* output, NSError* error)) handler;
 
 
 /// Delete a pinned object
@@ -43,13 +44,12 @@ extern NSInteger kSWGPinningApiMissingParamErrorCode;
 ///
 /// @param pinid Pin ID
 /// 
-///  code:200 message:"OK",
-///  code:400 message:"Bad Request",
+///  code:202 message:"",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return NSString*
+/// @return void
 -(NSURLSessionTask*) pinningPinsPinidDeleteWithPinid: (NSString*) pinid
-    completionHandler: (void (^)(NSString* output, NSError* error)) handler;
+    completionHandler: (void (^)(NSError* error)) handler;
 
 
 /// Get a pin status object
@@ -58,26 +58,34 @@ extern NSInteger kSWGPinningApiMissingParamErrorCode;
 /// @param pinid cid
 /// 
 ///  code:200 message:"OK",
-///  code:400 message:"Bad Request",
+///  code:404 message:"Not Found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return NSString*
+/// @return SWGTypesIpfsPinStatusResponse*
 -(NSURLSessionTask*) pinningPinsPinidGetWithPinid: (NSString*) pinid
-    completionHandler: (void (^)(NSString* output, NSError* error)) handler;
+    completionHandler: (void (^)(SWGTypesIpfsPinStatusResponse* output, NSError* error)) handler;
 
 
 /// Replace a pinned object
 /// This endpoint replaces a pinned object.
 ///
 /// @param pinid Pin ID
+/// @param cid CID of new pin
+/// @param name Name (filename) of new pin (optional)
+/// @param origins Origins of new pin (optional)
+/// @param meta Meta information of new pin (optional)
 /// 
-///  code:200 message:"OK",
-///  code:400 message:"Bad Request",
+///  code:202 message:"Accepted",
+///  code:404 message:"Not Found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return NSString*
+/// @return SWGTypesIpfsPinStatusResponse*
 -(NSURLSessionTask*) pinningPinsPinidPostWithPinid: (NSString*) pinid
-    completionHandler: (void (^)(NSString* output, NSError* error)) handler;
+    cid: (NSString*) cid
+    name: (NSString*) name
+    origins: (NSString*) origins
+    meta: (NSString*) meta
+    completionHandler: (void (^)(SWGTypesIpfsPinStatusResponse* output, NSError* error)) handler;
 
 
 /// Add and pin object
@@ -85,13 +93,12 @@ extern NSInteger kSWGPinningApiMissingParamErrorCode;
 ///
 /// @param pin Pin Body {cid:cid, name:name}
 /// 
-///  code:200 message:"OK",
-///  code:400 message:"Bad Request",
+///  code:202 message:"Accepted",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return NSString*
+/// @return SWGTypesIpfsPinStatusResponse*
 -(NSURLSessionTask*) pinningPinsPostWithPin: (SWGTypesIpfsPin*) pin
-    completionHandler: (void (^)(NSString* output, NSError* error)) handler;
+    completionHandler: (void (^)(SWGTypesIpfsPinStatusResponse* output, NSError* error)) handler;
 
 
 

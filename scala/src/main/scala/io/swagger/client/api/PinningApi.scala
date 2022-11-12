@@ -15,7 +15,9 @@ package io.swagger.client.api
 import java.text.SimpleDateFormat
 
 import io.swagger.client.model.HttpError
+import io.swagger.client.model.IpfsListPinStatusResponse
 import io.swagger.client.model.IpfsPin
+import io.swagger.client.model.IpfsPinStatusResponse
 import io.swagger.client.{ApiInvoker, ApiException}
 
 import com.sun.jersey.multipart.FormDataMultiPart
@@ -84,9 +86,9 @@ class PinningApi(
    * List all pin status objects
    * This endpoint lists all pin status objects
    *
-   * @return String
+   * @return IpfsListPinStatusResponse
    */
-  def pinningPinsGet(): Option[String] = {
+  def pinningPinsGet(): Option[IpfsListPinStatusResponse] = {
     val await = Try(Await.result(pinningPinsGetAsync(), Duration.Inf))
     await match {
       case Success(i) => Some(await.get)
@@ -98,9 +100,9 @@ class PinningApi(
    * List all pin status objects asynchronously
    * This endpoint lists all pin status objects
    *
-   * @return Future(String)
+   * @return Future(IpfsListPinStatusResponse)
    */
-  def pinningPinsGetAsync(): Future[String] = {
+  def pinningPinsGetAsync(): Future[IpfsListPinStatusResponse] = {
       helper.pinningPinsGet()
   }
 
@@ -109,9 +111,9 @@ class PinningApi(
    * This endpoint deletes a pinned object.
    *
    * @param pinid Pin ID 
-   * @return String
+   * @return void
    */
-  def pinningPinsPinidDelete(pinid: String): Option[String] = {
+  def pinningPinsPinidDelete(pinid: String) = {
     val await = Try(Await.result(pinningPinsPinidDeleteAsync(pinid), Duration.Inf))
     await match {
       case Success(i) => Some(await.get)
@@ -124,9 +126,9 @@ class PinningApi(
    * This endpoint deletes a pinned object.
    *
    * @param pinid Pin ID 
-   * @return Future(String)
+   * @return Future(void)
    */
-  def pinningPinsPinidDeleteAsync(pinid: String): Future[String] = {
+  def pinningPinsPinidDeleteAsync(pinid: String) = {
       helper.pinningPinsPinidDelete(pinid)
   }
 
@@ -135,9 +137,9 @@ class PinningApi(
    * This endpoint returns a pin status object.
    *
    * @param pinid cid 
-   * @return String
+   * @return IpfsPinStatusResponse
    */
-  def pinningPinsPinidGet(pinid: String): Option[String] = {
+  def pinningPinsPinidGet(pinid: String): Option[IpfsPinStatusResponse] = {
     val await = Try(Await.result(pinningPinsPinidGetAsync(pinid), Duration.Inf))
     await match {
       case Success(i) => Some(await.get)
@@ -150,9 +152,9 @@ class PinningApi(
    * This endpoint returns a pin status object.
    *
    * @param pinid cid 
-   * @return Future(String)
+   * @return Future(IpfsPinStatusResponse)
    */
-  def pinningPinsPinidGetAsync(pinid: String): Future[String] = {
+  def pinningPinsPinidGetAsync(pinid: String): Future[IpfsPinStatusResponse] = {
       helper.pinningPinsPinidGet(pinid)
   }
 
@@ -161,10 +163,14 @@ class PinningApi(
    * This endpoint replaces a pinned object.
    *
    * @param pinid Pin ID 
-   * @return String
+   * @param cid CID of new pin 
+   * @param name Name (filename) of new pin (optional)
+   * @param origins Origins of new pin (optional)
+   * @param meta Meta information of new pin (optional)
+   * @return IpfsPinStatusResponse
    */
-  def pinningPinsPinidPost(pinid: String): Option[String] = {
-    val await = Try(Await.result(pinningPinsPinidPostAsync(pinid), Duration.Inf))
+  def pinningPinsPinidPost(pinid: String, cid: String, name: Option[String] = None, origins: Option[String] = None, meta: Option[String] = None): Option[IpfsPinStatusResponse] = {
+    val await = Try(Await.result(pinningPinsPinidPostAsync(pinid, cid, name, origins, meta), Duration.Inf))
     await match {
       case Success(i) => Some(await.get)
       case Failure(t) => None
@@ -176,10 +182,14 @@ class PinningApi(
    * This endpoint replaces a pinned object.
    *
    * @param pinid Pin ID 
-   * @return Future(String)
+   * @param cid CID of new pin 
+   * @param name Name (filename) of new pin (optional)
+   * @param origins Origins of new pin (optional)
+   * @param meta Meta information of new pin (optional)
+   * @return Future(IpfsPinStatusResponse)
    */
-  def pinningPinsPinidPostAsync(pinid: String): Future[String] = {
-      helper.pinningPinsPinidPost(pinid)
+  def pinningPinsPinidPostAsync(pinid: String, cid: String, name: Option[String] = None, origins: Option[String] = None, meta: Option[String] = None): Future[IpfsPinStatusResponse] = {
+      helper.pinningPinsPinidPost(pinid, cid, name, origins, meta)
   }
 
   /**
@@ -187,9 +197,9 @@ class PinningApi(
    * This endpoint adds a pin to the IPFS daemon.
    *
    * @param pin Pin Body {cid:cid, name:name} 
-   * @return String
+   * @return IpfsPinStatusResponse
    */
-  def pinningPinsPost(pin: IpfsPin): Option[String] = {
+  def pinningPinsPost(pin: IpfsPin): Option[IpfsPinStatusResponse] = {
     val await = Try(Await.result(pinningPinsPostAsync(pin), Duration.Inf))
     await match {
       case Success(i) => Some(await.get)
@@ -202,9 +212,9 @@ class PinningApi(
    * This endpoint adds a pin to the IPFS daemon.
    *
    * @param pin Pin Body {cid:cid, name:name} 
-   * @return Future(String)
+   * @return Future(IpfsPinStatusResponse)
    */
-  def pinningPinsPostAsync(pin: IpfsPin): Future[String] = {
+  def pinningPinsPostAsync(pin: IpfsPin): Future[IpfsPinStatusResponse] = {
       helper.pinningPinsPost(pin)
   }
 
@@ -212,7 +222,7 @@ class PinningApi(
 
 class PinningApiAsyncHelper(client: TransportClient, config: SwaggerConfig) extends ApiClient(client, config) {
 
-  def pinningPinsGet()(implicit reader: ClientResponseReader[String]): Future[String] = {
+  def pinningPinsGet()(implicit reader: ClientResponseReader[IpfsListPinStatusResponse]): Future[IpfsListPinStatusResponse] = {
     // create path and map variables
     val path = (addFmt("/pinning/pins"))
 
@@ -227,7 +237,7 @@ class PinningApiAsyncHelper(client: TransportClient, config: SwaggerConfig) exte
     }
   }
 
-  def pinningPinsPinidDelete(pinid: String)(implicit reader: ClientResponseReader[String]): Future[String] = {
+  def pinningPinsPinidDelete(pinid: String)(implicit reader: ClientResponseReader[Unit]): Future[Unit] = {
     // create path and map variables
     val path = (addFmt("/pinning/pins/{pinid}")
       replaceAll("\\{" + "pinid" + "\\}", pinid.toString))
@@ -245,7 +255,7 @@ class PinningApiAsyncHelper(client: TransportClient, config: SwaggerConfig) exte
     }
   }
 
-  def pinningPinsPinidGet(pinid: String)(implicit reader: ClientResponseReader[String]): Future[String] = {
+  def pinningPinsPinidGet(pinid: String)(implicit reader: ClientResponseReader[IpfsPinStatusResponse]): Future[IpfsPinStatusResponse] = {
     // create path and map variables
     val path = (addFmt("/pinning/pins/{pinid}")
       replaceAll("\\{" + "pinid" + "\\}", pinid.toString))
@@ -263,7 +273,12 @@ class PinningApiAsyncHelper(client: TransportClient, config: SwaggerConfig) exte
     }
   }
 
-  def pinningPinsPinidPost(pinid: String)(implicit reader: ClientResponseReader[String]): Future[String] = {
+  def pinningPinsPinidPost(pinid: String,
+    cid: String,
+    name: Option[String] = None,
+    origins: Option[String] = None,
+    meta: Option[String] = None
+    )(implicit reader: ClientResponseReader[IpfsPinStatusResponse], writer: RequestWriter[String], writer: RequestWriter[Option[String]], writer: RequestWriter[Option[String]], writer: RequestWriter[Option[String]]): Future[IpfsPinStatusResponse] = {
     // create path and map variables
     val path = (addFmt("/pinning/pins/{pinid}")
       replaceAll("\\{" + "pinid" + "\\}", pinid.toString))
@@ -274,14 +289,16 @@ class PinningApiAsyncHelper(client: TransportClient, config: SwaggerConfig) exte
 
     if (pinid == null) throw new Exception("Missing required parameter 'pinid' when calling PinningApi->pinningPinsPinidPost")
 
+    if (cid == null) throw new Exception("Missing required parameter 'cid' when calling PinningApi->pinningPinsPinidPost")
 
-    val resFuture = client.submit("POST", path, queryParams.toMap, headerParams.toMap, "")
+
+    val resFuture = client.submit("POST", path, queryParams.toMap, headerParams.toMap, writer.write(meta))
     resFuture flatMap { resp =>
       process(reader.read(resp))
     }
   }
 
-  def pinningPinsPost(pin: IpfsPin)(implicit reader: ClientResponseReader[String], writer: RequestWriter[IpfsPin]): Future[String] = {
+  def pinningPinsPost(pin: IpfsPin)(implicit reader: ClientResponseReader[IpfsPinStatusResponse], writer: RequestWriter[IpfsPin]): Future[IpfsPinStatusResponse] = {
     // create path and map variables
     val path = (addFmt("/pinning/pins"))
 

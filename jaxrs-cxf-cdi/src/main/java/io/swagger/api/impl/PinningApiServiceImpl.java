@@ -5,7 +5,9 @@ import io.swagger.model.*;
 
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 
+import io.swagger.model.TypesIpfsListPinStatusResponse;
 import io.swagger.model.TypesIpfsPin;
+import io.swagger.model.TypesIpfsPinStatusResponse;
 import io.swagger.model.UtilHttpError;
 
 import java.util.List;
@@ -17,7 +19,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @RequestScoped
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2022-11-08T02:39:47.430Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2022-11-12T00:50:17.260Z")
 public class PinningApiServiceImpl implements PinningApiService {
       @Override
       public Response pinningPinsGet(SecurityContext securityContext) {
@@ -35,7 +37,7 @@ public class PinningApiServiceImpl implements PinningApiService {
       return Response.ok().entity("magic!").build();
   }
       @Override
-      public Response pinningPinsPinidPost(String pinid, SecurityContext securityContext) {
+      public Response pinningPinsPinidPost(String pinid, String cid, String name, String origins, String meta, SecurityContext securityContext) {
       // do some magic!
       return Response.ok().entity("magic!").build();
   }

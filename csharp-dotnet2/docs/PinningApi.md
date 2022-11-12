@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 <a name="pinningpinsget"></a>
 # **PinningPinsGet**
-> string PinningPinsGet ()
+> TypesIpfsListPinStatusResponse PinningPinsGet ()
 
 List all pin status objects
 
@@ -44,7 +44,7 @@ namespace Example
             try
             {
                 // List all pin status objects
-                string result = apiInstance.PinningPinsGet();
+                TypesIpfsListPinStatusResponse result = apiInstance.PinningPinsGet();
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -61,7 +61,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**string**
+[**TypesIpfsListPinStatusResponse**](TypesIpfsListPinStatusResponse.md)
 
 ### Authorization
 
@@ -76,7 +76,7 @@ This endpoint does not need any parameter.
 
 <a name="pinningpinspiniddelete"></a>
 # **PinningPinsPinidDelete**
-> string PinningPinsPinidDelete (string pinid)
+> void PinningPinsPinidDelete (string pinid)
 
 Delete a pinned object
 
@@ -108,8 +108,7 @@ namespace Example
             try
             {
                 // Delete a pinned object
-                string result = apiInstance.PinningPinsPinidDelete(pinid);
-                Debug.WriteLine(result);
+                apiInstance.PinningPinsPinidDelete(pinid);
             }
             catch (Exception e)
             {
@@ -128,7 +127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+void (empty response body)
 
 ### Authorization
 
@@ -143,7 +142,7 @@ Name | Type | Description  | Notes
 
 <a name="pinningpinspinidget"></a>
 # **PinningPinsPinidGet**
-> string PinningPinsPinidGet (string pinid)
+> TypesIpfsPinStatusResponse PinningPinsPinidGet (string pinid)
 
 Get a pin status object
 
@@ -175,7 +174,7 @@ namespace Example
             try
             {
                 // Get a pin status object
-                string result = apiInstance.PinningPinsPinidGet(pinid);
+                TypesIpfsPinStatusResponse result = apiInstance.PinningPinsPinidGet(pinid);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -195,7 +194,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**TypesIpfsPinStatusResponse**](TypesIpfsPinStatusResponse.md)
 
 ### Authorization
 
@@ -210,7 +209,7 @@ Name | Type | Description  | Notes
 
 <a name="pinningpinspinidpost"></a>
 # **PinningPinsPinidPost**
-> string PinningPinsPinidPost (string pinid)
+> TypesIpfsPinStatusResponse PinningPinsPinidPost (string pinid, string cid, string name, string origins, string meta)
 
 Replace a pinned object
 
@@ -238,11 +237,15 @@ namespace Example
 
             var apiInstance = new PinningApi();
             var pinid = pinid_example;  // string | Pin ID
+            var cid = cid_example;  // string | CID of new pin
+            var name = name_example;  // string | Name (filename) of new pin (optional) 
+            var origins = origins_example;  // string | Origins of new pin (optional) 
+            var meta = meta_example;  // string | Meta information of new pin (optional) 
 
             try
             {
                 // Replace a pinned object
-                string result = apiInstance.PinningPinsPinidPost(pinid);
+                TypesIpfsPinStatusResponse result = apiInstance.PinningPinsPinidPost(pinid, cid, name, origins, meta);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -259,10 +262,14 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pinid** | **string**| Pin ID | 
+ **cid** | **string**| CID of new pin | 
+ **name** | **string**| Name (filename) of new pin | [optional] 
+ **origins** | **string**| Origins of new pin | [optional] 
+ **meta** | **string**| Meta information of new pin | [optional] 
 
 ### Return type
 
-**string**
+[**TypesIpfsPinStatusResponse**](TypesIpfsPinStatusResponse.md)
 
 ### Authorization
 
@@ -277,7 +284,7 @@ Name | Type | Description  | Notes
 
 <a name="pinningpinspost"></a>
 # **PinningPinsPost**
-> string PinningPinsPost (TypesIpfsPin pin)
+> TypesIpfsPinStatusResponse PinningPinsPost (TypesIpfsPin pin)
 
 Add and pin object
 
@@ -309,7 +316,7 @@ namespace Example
             try
             {
                 // Add and pin object
-                string result = apiInstance.PinningPinsPost(pin);
+                TypesIpfsPinStatusResponse result = apiInstance.PinningPinsPost(pin);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -329,7 +336,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**TypesIpfsPinStatusResponse**](TypesIpfsPinStatusResponse.md)
 
 ### Authorization
 

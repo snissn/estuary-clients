@@ -50,7 +50,7 @@ export class PinningApi {
      * This endpoint lists all pin status objects
      * @summary List all pin status objects
      */
-    public pinningPinsGet(extraJQueryAjaxSettings?: JQueryAjaxSettings): JQueryPromise<{ response: JQueryXHR; body: string;  }> {
+    public pinningPinsGet(extraJQueryAjaxSettings?: JQueryAjaxSettings): JQueryPromise<{ response: JQueryXHR; body: models.TypesIpfsListPinStatusResponse;  }> {
         let localVarPath = this.basePath + '/pinning/pins';
 
         let queryParameters: any = {};
@@ -93,7 +93,7 @@ export class PinningApi {
 
         let dfd = $.Deferred();
         $.ajax(requestOptions).then(
-            (data: string, textStatus: string, jqXHR: JQueryXHR) =>
+            (data: models.TypesIpfsListPinStatusResponse, textStatus: string, jqXHR: JQueryXHR) =>
                 dfd.resolve(jqXHR, data),
             (xhr: JQueryXHR, textStatus: string, errorThrown: string) =>
                 dfd.reject(xhr, errorThrown)
@@ -106,7 +106,7 @@ export class PinningApi {
      * @summary Delete a pinned object
      * @param pinid Pin ID
      */
-    public pinningPinsPinidDelete(pinid: string, extraJQueryAjaxSettings?: JQueryAjaxSettings): JQueryPromise<{ response: JQueryXHR; body: string;  }> {
+    public pinningPinsPinidDelete(pinid: string, extraJQueryAjaxSettings?: JQueryAjaxSettings): JQueryPromise<{ response: JQueryXHR; body?: any;  }> {
         let localVarPath = this.basePath + '/pinning/pins/{pinid}'.replace('{' + 'pinid' + '}', encodeURIComponent(String(pinid)));
 
         let queryParameters: any = {};
@@ -154,7 +154,7 @@ export class PinningApi {
 
         let dfd = $.Deferred();
         $.ajax(requestOptions).then(
-            (data: string, textStatus: string, jqXHR: JQueryXHR) =>
+            (data: any, textStatus: string, jqXHR: JQueryXHR) =>
                 dfd.resolve(jqXHR, data),
             (xhr: JQueryXHR, textStatus: string, errorThrown: string) =>
                 dfd.reject(xhr, errorThrown)
@@ -167,7 +167,7 @@ export class PinningApi {
      * @summary Get a pin status object
      * @param pinid cid
      */
-    public pinningPinsPinidGet(pinid: string, extraJQueryAjaxSettings?: JQueryAjaxSettings): JQueryPromise<{ response: JQueryXHR; body: string;  }> {
+    public pinningPinsPinidGet(pinid: string, extraJQueryAjaxSettings?: JQueryAjaxSettings): JQueryPromise<{ response: JQueryXHR; body: models.TypesIpfsPinStatusResponse;  }> {
         let localVarPath = this.basePath + '/pinning/pins/{pinid}'.replace('{' + 'pinid' + '}', encodeURIComponent(String(pinid)));
 
         let queryParameters: any = {};
@@ -215,7 +215,7 @@ export class PinningApi {
 
         let dfd = $.Deferred();
         $.ajax(requestOptions).then(
-            (data: string, textStatus: string, jqXHR: JQueryXHR) =>
+            (data: models.TypesIpfsPinStatusResponse, textStatus: string, jqXHR: JQueryXHR) =>
                 dfd.resolve(jqXHR, data),
             (xhr: JQueryXHR, textStatus: string, errorThrown: string) =>
                 dfd.reject(xhr, errorThrown)
@@ -227,8 +227,12 @@ export class PinningApi {
      * This endpoint replaces a pinned object.
      * @summary Replace a pinned object
      * @param pinid Pin ID
+     * @param cid CID of new pin
+     * @param name Name (filename) of new pin
+     * @param origins Origins of new pin
+     * @param meta Meta information of new pin
      */
-    public pinningPinsPinidPost(pinid: string, extraJQueryAjaxSettings?: JQueryAjaxSettings): JQueryPromise<{ response: JQueryXHR; body: string;  }> {
+    public pinningPinsPinidPost(pinid: string, cid: string, name?: string, origins?: string, meta?: string, extraJQueryAjaxSettings?: JQueryAjaxSettings): JQueryPromise<{ response: JQueryXHR; body: models.TypesIpfsPinStatusResponse;  }> {
         let localVarPath = this.basePath + '/pinning/pins/{pinid}'.replace('{' + 'pinid' + '}', encodeURIComponent(String(pinid)));
 
         let queryParameters: any = {};
@@ -236,6 +240,11 @@ export class PinningApi {
         // verify required parameter 'pinid' is not null or undefined
         if (pinid === null || pinid === undefined) {
             throw new Error('Required parameter pinid was null or undefined when calling pinningPinsPinidPost.');
+        }
+
+        // verify required parameter 'cid' is not null or undefined
+        if (cid === null || cid === undefined) {
+            throw new Error('Required parameter cid was null or undefined when calling pinningPinsPinidPost.');
         }
 
 
@@ -255,6 +264,8 @@ export class PinningApi {
         }
 
 
+        headerParams['Content-Type'] = 'application/json';
+
         let requestOptions: JQueryAjaxSettings = {
             url: localVarPath,
             type: 'POST',
@@ -262,6 +273,7 @@ export class PinningApi {
             processData: false
         };
 
+        requestOptions.data = JSON.stringify(meta);
         if (headerParams['Content-Type']) {
             requestOptions.contentType = headerParams['Content-Type'];
         }
@@ -276,7 +288,7 @@ export class PinningApi {
 
         let dfd = $.Deferred();
         $.ajax(requestOptions).then(
-            (data: string, textStatus: string, jqXHR: JQueryXHR) =>
+            (data: models.TypesIpfsPinStatusResponse, textStatus: string, jqXHR: JQueryXHR) =>
                 dfd.resolve(jqXHR, data),
             (xhr: JQueryXHR, textStatus: string, errorThrown: string) =>
                 dfd.reject(xhr, errorThrown)
@@ -289,7 +301,7 @@ export class PinningApi {
      * @summary Add and pin object
      * @param pin Pin Body {cid:cid, name:name}
      */
-    public pinningPinsPost(pin: models.TypesIpfsPin, extraJQueryAjaxSettings?: JQueryAjaxSettings): JQueryPromise<{ response: JQueryXHR; body: string;  }> {
+    public pinningPinsPost(pin: models.TypesIpfsPin, extraJQueryAjaxSettings?: JQueryAjaxSettings): JQueryPromise<{ response: JQueryXHR; body: models.TypesIpfsPinStatusResponse;  }> {
         let localVarPath = this.basePath + '/pinning/pins';
 
         let queryParameters: any = {};
@@ -340,7 +352,7 @@ export class PinningApi {
 
         let dfd = $.Deferred();
         $.ajax(requestOptions).then(
-            (data: string, textStatus: string, jqXHR: JQueryXHR) =>
+            (data: models.TypesIpfsPinStatusResponse, textStatus: string, jqXHR: JQueryXHR) =>
                 dfd.resolve(jqXHR, data),
             (xhr: JQueryXHR, textStatus: string, errorThrown: string) =>
                 dfd.reject(xhr, errorThrown)

@@ -138,9 +138,15 @@ instance Arbitrary MainImportDealBody where
   arbitrary =
     MainImportDealBody
       <$> arbitrary -- mainImportDealBodyColuuid :: Maybe Text
-      <*> arbitrary -- mainImportDealBodyDealIDs :: Maybe [Int]
+      <*> arbitrary -- mainImportDealBodyDealIds :: Maybe [Int]
       <*> arbitrary -- mainImportDealBodyDir :: Maybe Text
       <*> arbitrary -- mainImportDealBodyName :: Maybe Text
+    
+instance Arbitrary TypesIpfsListPinStatusResponse where
+  arbitrary =
+    TypesIpfsListPinStatusResponse
+      <$> arbitrary -- typesIpfsListPinStatusResponseCount :: Maybe Int
+      <*> arbitrary -- typesIpfsListPinStatusResponseResults :: Maybe [TypesIpfsPinStatusResponse]
     
 instance Arbitrary TypesIpfsPin where
   arbitrary =
@@ -149,6 +155,16 @@ instance Arbitrary TypesIpfsPin where
       <*> arbitrary -- typesIpfsPinMeta :: Maybe A.Value
       <*> arbitrary -- typesIpfsPinName :: Maybe Text
       <*> arbitrary -- typesIpfsPinOrigins :: Maybe [Text]
+    
+instance Arbitrary TypesIpfsPinStatusResponse where
+  arbitrary =
+    TypesIpfsPinStatusResponse
+      <$> arbitrary -- typesIpfsPinStatusResponseCreated :: Maybe Text
+      <*> arbitrary -- typesIpfsPinStatusResponseDelegates :: Maybe [Text]
+      <*> arbitrary -- typesIpfsPinStatusResponseInfo :: Maybe A.Value
+      <*> arbitrary -- typesIpfsPinStatusResponsePin :: Maybe TypesIpfsPin
+      <*> arbitrary -- typesIpfsPinStatusResponseRequestid :: Maybe Text
+      <*> arbitrary -- typesIpfsPinStatusResponseStatus :: Maybe Text
     
 instance Arbitrary UtilContentAddIpfsBody where
   arbitrary =

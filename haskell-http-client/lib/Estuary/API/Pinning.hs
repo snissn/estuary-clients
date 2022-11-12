@@ -68,7 +68,7 @@ import qualified Prelude as P
 -- AuthMethod: 'AuthApiKeyBearerAuth'
 -- 
 pinningPinsGet 
-  :: EstuaryRequest PinningPinsGet MimeNoContent Text MimeJSON
+  :: EstuaryRequest PinningPinsGet MimeNoContent TypesIpfsListPinStatusResponse MimeJSON
 pinningPinsGet =
   _mkRequest "GET" ["/pinning/pins"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyBearerAuth)
@@ -88,9 +88,11 @@ instance Produces PinningPinsGet MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerAuth'
 -- 
+-- Note: Has 'Produces' instances, but no response schema
+-- 
 pinningPinsPinidDelete 
   :: Pinid -- ^ "pinid" -  Pin ID
-  -> EstuaryRequest PinningPinsPinidDelete MimeNoContent Text MimeJSON
+  -> EstuaryRequest PinningPinsPinidDelete MimeNoContent res MimeJSON
 pinningPinsPinidDelete (Pinid pinid) =
   _mkRequest "DELETE" ["/pinning/pins/",toPath pinid]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyBearerAuth)
@@ -112,7 +114,7 @@ instance Produces PinningPinsPinidDelete MimeJSON
 -- 
 pinningPinsPinidGet 
   :: Pinid -- ^ "pinid" -  cid
-  -> EstuaryRequest PinningPinsPinidGet MimeNoContent Text MimeJSON
+  -> EstuaryRequest PinningPinsPinidGet MimeNoContent TypesIpfsPinStatusResponse MimeJSON
 pinningPinsPinidGet (Pinid pinid) =
   _mkRequest "GET" ["/pinning/pins/",toPath pinid]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyBearerAuth)
@@ -133,13 +135,29 @@ instance Produces PinningPinsPinidGet MimeJSON
 -- AuthMethod: 'AuthApiKeyBearerAuth'
 -- 
 pinningPinsPinidPost 
-  :: Pinid -- ^ "pinid" -  Pin ID
-  -> EstuaryRequest PinningPinsPinidPost MimeNoContent Text MimeJSON
-pinningPinsPinidPost (Pinid pinid) =
+  :: (Consumes PinningPinsPinidPost contentType, MimeRender contentType Cid2)
+  => ContentType contentType -- ^ request content-type ('MimeType')
+  -> Pinid -- ^ "pinid" -  Pin ID
+  -> Cid2 -- ^ "cid" -  CID of new pin
+  -> EstuaryRequest PinningPinsPinidPost contentType TypesIpfsPinStatusResponse MimeJSON
+pinningPinsPinidPost _ (Pinid pinid) cid =
   _mkRequest "POST" ["/pinning/pins/",toPath pinid]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyBearerAuth)
+    `setBodyParam` cid
 
-data PinningPinsPinidPost  
+data PinningPinsPinidPost 
+
+-- | /Body Param/ "cid" - CID of new pin
+instance HasBodyParam PinningPinsPinidPost Cid2
+
+-- | /Body Param/ "name" - Name (filename) of new pin
+instance HasBodyParam PinningPinsPinidPost Name2
+
+-- | /Body Param/ "origins" - Origins of new pin
+instance HasBodyParam PinningPinsPinidPost Origins2
+
+-- | /Body Param/ "meta" - Meta information of new pin
+instance HasBodyParam PinningPinsPinidPost Meta2 
 -- | @application/json@
 instance Produces PinningPinsPinidPost MimeJSON
 
@@ -158,7 +176,7 @@ pinningPinsPost
   :: (Consumes PinningPinsPost contentType, MimeRender contentType TypesIpfsPin)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> TypesIpfsPin -- ^ "pin" -  Pin Body {cid:cid, name:name}
-  -> EstuaryRequest PinningPinsPost contentType Text MimeJSON
+  -> EstuaryRequest PinningPinsPost contentType TypesIpfsPinStatusResponse MimeJSON
 pinningPinsPost _ pin =
   _mkRequest "POST" ["/pinning/pins"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyBearerAuth)

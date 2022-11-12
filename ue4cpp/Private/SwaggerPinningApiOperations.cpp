@@ -63,9 +63,6 @@ void SwaggerPinningApi::PinningPinsGetResponse::SetHttpResponseCode(EHttpRespons
 	case 400:
 		SetResponseString(TEXT("Bad Request"));
 		break;
-	case 404:
-		SetResponseString(TEXT("Not Found"));
-		break;
 	case 500:
 		SetResponseString(TEXT("Internal Server Error"));
 		break;
@@ -115,12 +112,9 @@ void SwaggerPinningApi::PinningPinsPinidDeleteResponse::SetHttpResponseCode(EHtt
 	Response::SetHttpResponseCode(InHttpResponseCode);
 	switch ((int)InHttpResponseCode)
 	{
-	case 200:
+	case 202:
 	default:
-		SetResponseString(TEXT("OK"));
-		break;
-	case 400:
-		SetResponseString(TEXT("Bad Request"));
+		SetResponseString(TEXT(""));
 		break;
 	case 500:
 		SetResponseString(TEXT("Internal Server Error"));
@@ -130,7 +124,7 @@ void SwaggerPinningApi::PinningPinsPinidDeleteResponse::SetHttpResponseCode(EHtt
 
 bool SwaggerPinningApi::PinningPinsPinidDeleteResponse::FromJson(const TSharedPtr<FJsonValue>& JsonValue)
 {
-	return TryGetJsonValue(JsonValue, Content);
+	return true;
 }
 
 FString SwaggerPinningApi::PinningPinsPinidGetRequest::ComputePath() const
@@ -175,8 +169,8 @@ void SwaggerPinningApi::PinningPinsPinidGetResponse::SetHttpResponseCode(EHttpRe
 	default:
 		SetResponseString(TEXT("OK"));
 		break;
-	case 400:
-		SetResponseString(TEXT("Bad Request"));
+	case 404:
+		SetResponseString(TEXT("Not Found"));
 		break;
 	case 500:
 		SetResponseString(TEXT("Internal Server Error"));
@@ -209,12 +203,41 @@ void SwaggerPinningApi::PinningPinsPinidPostRequest::SetupHttpRequest(const TSha
 	// Default to Json Body request
 	if (Consumes.Num() == 0 || Consumes.Contains(TEXT("application/json")))
 	{
+		// Body parameters
+		FString JsonBody;
+		JsonWriter Writer = TJsonWriterFactory<>::Create(&JsonBody);
+
+		WriteJsonValue(Writer, Cid);
+		if (Name.IsSet())
+		{
+			WriteJsonValue(Writer, Name.GetValue());
+		}
+		if (Origins.IsSet())
+		{
+			WriteJsonValue(Writer, Origins.GetValue());
+		}
+		if (Meta.IsSet())
+		{
+			WriteJsonValue(Writer, Meta.GetValue());
+		}
+		Writer->Close();
+
+		HttpRequest->SetHeader(TEXT("Content-Type"), TEXT("application/json; charset=utf-8"));
+		HttpRequest->SetContentAsString(JsonBody);
 	}
 	else if (Consumes.Contains(TEXT("multipart/form-data")))
 	{
+		UE_LOG(LogSwagger, Error, TEXT("Body parameter (cid) was ignored, not supported in multipart form"));
+		UE_LOG(LogSwagger, Error, TEXT("Body parameter (name) was ignored, not supported in multipart form"));
+		UE_LOG(LogSwagger, Error, TEXT("Body parameter (origins) was ignored, not supported in multipart form"));
+		UE_LOG(LogSwagger, Error, TEXT("Body parameter (meta) was ignored, not supported in multipart form"));
 	}
 	else if (Consumes.Contains(TEXT("application/x-www-form-urlencoded")))
 	{
+		UE_LOG(LogSwagger, Error, TEXT("Body parameter (cid) was ignored, not supported in urlencoded requests"));
+		UE_LOG(LogSwagger, Error, TEXT("Body parameter (name) was ignored, not supported in urlencoded requests"));
+		UE_LOG(LogSwagger, Error, TEXT("Body parameter (origins) was ignored, not supported in urlencoded requests"));
+		UE_LOG(LogSwagger, Error, TEXT("Body parameter (meta) was ignored, not supported in urlencoded requests"));
 	}
 	else
 	{
@@ -227,12 +250,12 @@ void SwaggerPinningApi::PinningPinsPinidPostResponse::SetHttpResponseCode(EHttpR
 	Response::SetHttpResponseCode(InHttpResponseCode);
 	switch ((int)InHttpResponseCode)
 	{
-	case 200:
+	case 202:
 	default:
-		SetResponseString(TEXT("OK"));
+		SetResponseString(TEXT("Accepted"));
 		break;
-	case 400:
-		SetResponseString(TEXT("Bad Request"));
+	case 404:
+		SetResponseString(TEXT("Not Found"));
 		break;
 	case 500:
 		SetResponseString(TEXT("Internal Server Error"));
@@ -290,12 +313,9 @@ void SwaggerPinningApi::PinningPinsPostResponse::SetHttpResponseCode(EHttpRespon
 	Response::SetHttpResponseCode(InHttpResponseCode);
 	switch ((int)InHttpResponseCode)
 	{
-	case 200:
+	case 202:
 	default:
-		SetResponseString(TEXT("OK"));
-		break;
-	case 400:
-		SetResponseString(TEXT("Bad Request"));
+		SetResponseString(TEXT("Accepted"));
 		break;
 	case 500:
 		SetResponseString(TEXT("Internal Server Error"));

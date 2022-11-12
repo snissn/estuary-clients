@@ -27,7 +27,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**string**
+[**Types.IpfsListPinStatusResponse**](Types.IpfsListPinStatusResponse.md)
 
 ### Authorization
 
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+(empty response body)
 
 ### Authorization
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**Types.IpfsPinStatusResponse**](Types.IpfsPinStatusResponse.md)
 
 ### Authorization
 
@@ -120,10 +120,14 @@ This endpoint replaces a pinned object.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pinid** | **string** | Pin ID |
+ **cid** | **string** | CID of new pin |
+ **name** | **string** | Name (filename) of new pin | [optional]
+ **origins** | **string** | Origins of new pin | [optional]
+ **meta** | **string** | Meta information of new pin | [optional]
 
 ### Return type
 
-**string**
+[**Types.IpfsPinStatusResponse**](Types.IpfsPinStatusResponse.md)
 
 ### Authorization
 
@@ -155,7 +159,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**Types.IpfsPinStatusResponse**](Types.IpfsPinStatusResponse.md)
 
 ### Authorization
 

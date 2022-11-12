@@ -5,7 +5,9 @@
 #include <cstring>
 #include <list>
 #include <glib.h>
+#include "Types.IpfsListPinStatusResponse.h"
 #include "Types.IpfsPin.h"
+#include "Types.IpfsPinStatusResponse.h"
 #include "Util.HttpError.h"
 #include "Error.h"
 
@@ -34,7 +36,7 @@ public:
  */
 bool pinningPinsGetSync(char * accessToken,
 	
-	void(* handler)(std::string, Error, void* )
+	void(* handler)(Types.IpfsListPinStatusResponse, Error, void* )
 	, void* userData);
 
 /*! \brief List all pin status objects. *Asynchronous*
@@ -46,7 +48,7 @@ bool pinningPinsGetSync(char * accessToken,
  */
 bool pinningPinsGetAsync(char * accessToken,
 	
-	void(* handler)(std::string, Error, void* )
+	void(* handler)(Types.IpfsListPinStatusResponse, Error, void* )
 	, void* userData);
 
 
@@ -60,8 +62,8 @@ bool pinningPinsGetAsync(char * accessToken,
  */
 bool pinningPinsPinidDeleteSync(char * accessToken,
 	std::string pinid, 
-	void(* handler)(std::string, Error, void* )
-	, void* userData);
+	
+	void(* handler)(Error, void* ) , void* userData);
 
 /*! \brief Delete a pinned object. *Asynchronous*
  *
@@ -73,8 +75,8 @@ bool pinningPinsPinidDeleteSync(char * accessToken,
  */
 bool pinningPinsPinidDeleteAsync(char * accessToken,
 	std::string pinid, 
-	void(* handler)(std::string, Error, void* )
-	, void* userData);
+	
+	void(* handler)(Error, void* ) , void* userData);
 
 
 /*! \brief Get a pin status object. *Synchronous*
@@ -87,7 +89,7 @@ bool pinningPinsPinidDeleteAsync(char * accessToken,
  */
 bool pinningPinsPinidGetSync(char * accessToken,
 	std::string pinid, 
-	void(* handler)(std::string, Error, void* )
+	void(* handler)(Types.IpfsPinStatusResponse, Error, void* )
 	, void* userData);
 
 /*! \brief Get a pin status object. *Asynchronous*
@@ -100,7 +102,7 @@ bool pinningPinsPinidGetSync(char * accessToken,
  */
 bool pinningPinsPinidGetAsync(char * accessToken,
 	std::string pinid, 
-	void(* handler)(std::string, Error, void* )
+	void(* handler)(Types.IpfsPinStatusResponse, Error, void* )
 	, void* userData);
 
 
@@ -108,26 +110,34 @@ bool pinningPinsPinidGetAsync(char * accessToken,
  *
  * This endpoint replaces a pinned object.
  * \param pinid Pin ID *Required*
+ * \param cid CID of new pin *Required*
+ * \param name Name (filename) of new pin
+ * \param origins Origins of new pin
+ * \param meta Meta information of new pin
  * \param handler The callback function to be invoked on completion. *Required*
  * \param accessToken The Authorization token. *Required*
  * \param userData The user data to be passed to the callback function.
  */
 bool pinningPinsPinidPostSync(char * accessToken,
-	std::string pinid, 
-	void(* handler)(std::string, Error, void* )
+	std::string pinid, std::string cid, std::string name, std::string origins, std::string meta, 
+	void(* handler)(Types.IpfsPinStatusResponse, Error, void* )
 	, void* userData);
 
 /*! \brief Replace a pinned object. *Asynchronous*
  *
  * This endpoint replaces a pinned object.
  * \param pinid Pin ID *Required*
+ * \param cid CID of new pin *Required*
+ * \param name Name (filename) of new pin
+ * \param origins Origins of new pin
+ * \param meta Meta information of new pin
  * \param handler The callback function to be invoked on completion. *Required*
  * \param accessToken The Authorization token. *Required*
  * \param userData The user data to be passed to the callback function.
  */
 bool pinningPinsPinidPostAsync(char * accessToken,
-	std::string pinid, 
-	void(* handler)(std::string, Error, void* )
+	std::string pinid, std::string cid, std::string name, std::string origins, std::string meta, 
+	void(* handler)(Types.IpfsPinStatusResponse, Error, void* )
 	, void* userData);
 
 
@@ -141,7 +151,7 @@ bool pinningPinsPinidPostAsync(char * accessToken,
  */
 bool pinningPinsPostSync(char * accessToken,
 	Types.IpfsPin pin, 
-	void(* handler)(std::string, Error, void* )
+	void(* handler)(Types.IpfsPinStatusResponse, Error, void* )
 	, void* userData);
 
 /*! \brief Add and pin object. *Asynchronous*
@@ -154,7 +164,7 @@ bool pinningPinsPostSync(char * accessToken,
  */
 bool pinningPinsPostAsync(char * accessToken,
 	Types.IpfsPin pin, 
-	void(* handler)(std::string, Error, void* )
+	void(* handler)(Types.IpfsPinStatusResponse, Error, void* )
 	, void* userData);
 
 

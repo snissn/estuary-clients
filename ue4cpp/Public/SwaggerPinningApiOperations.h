@@ -14,7 +14,9 @@
 #include "SwaggerBaseModel.h"
 #include "SwaggerPinningApi.h"
 
+#include "SwaggerTypes_IpfsListPinStatusResponse.h"
 #include "SwaggerTypes_IpfsPin.h"
+#include "SwaggerTypes_IpfsPinStatusResponse.h"
 #include "SwaggerUtil_HttpError.h"
 
 namespace Swagger 
@@ -40,7 +42,7 @@ public:
 	void SetHttpResponseCode(EHttpResponseCodes::Type InHttpResponseCode) final;
 	bool FromJson(const TSharedPtr<FJsonValue>& JsonObject) final;
     
-    FString Content;
+    SwaggerTypes_IpfsListPinStatusResponse Content;
 };
 
 /* Delete a pinned object
@@ -65,7 +67,7 @@ public:
 	void SetHttpResponseCode(EHttpResponseCodes::Type InHttpResponseCode) final;
 	bool FromJson(const TSharedPtr<FJsonValue>& JsonObject) final;
     
-    FString Content;
+    
 };
 
 /* Get a pin status object
@@ -90,7 +92,7 @@ public:
 	void SetHttpResponseCode(EHttpResponseCodes::Type InHttpResponseCode) final;
 	bool FromJson(const TSharedPtr<FJsonValue>& JsonObject) final;
     
-    FString Content;
+    SwaggerTypes_IpfsPinStatusResponse Content;
 };
 
 /* Replace a pinned object
@@ -106,6 +108,14 @@ public:
     
 	/* Pin ID */
 	FString Pinid;
+	/* CID of new pin */
+	FString Cid;
+	/* Name (filename) of new pin */
+	TOptional<FString> Name;
+	/* Origins of new pin */
+	TOptional<FString> Origins;
+	/* Meta information of new pin */
+	TOptional<FString> Meta;
 };
 
 class SWAGGER_API SwaggerPinningApi::PinningPinsPinidPostResponse : public Response
@@ -115,7 +125,7 @@ public:
 	void SetHttpResponseCode(EHttpResponseCodes::Type InHttpResponseCode) final;
 	bool FromJson(const TSharedPtr<FJsonValue>& JsonObject) final;
     
-    FString Content;
+    SwaggerTypes_IpfsPinStatusResponse Content;
 };
 
 /* Add and pin object
@@ -140,7 +150,7 @@ public:
 	void SetHttpResponseCode(EHttpResponseCodes::Type InHttpResponseCode) final;
 	bool FromJson(const TSharedPtr<FJsonValue>& JsonObject) final;
     
-    FString Content;
+    SwaggerTypes_IpfsPinStatusResponse Content;
 };
 
 }

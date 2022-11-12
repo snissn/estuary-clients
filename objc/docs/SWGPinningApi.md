@@ -14,7 +14,7 @@ Method | HTTP request | Description
 # **pinningPinsGet**
 ```objc
 -(NSURLSessionTask*) pinningPinsGetWithCompletionHandler: 
-        (void (^)(NSString* output, NSError* error)) handler;
+        (void (^)(SWGTypesIpfsListPinStatusResponse* output, NSError* error)) handler;
 ```
 
 List all pin status objects
@@ -36,7 +36,7 @@ SWGPinningApi*apiInstance = [[SWGPinningApi alloc] init];
 
 // List all pin status objects
 [apiInstance pinningPinsGetWithCompletionHandler: 
-          ^(NSString* output, NSError* error) {
+          ^(SWGTypesIpfsListPinStatusResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -51,7 +51,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**NSString***
+[**SWGTypesIpfsListPinStatusResponse***](SWGTypesIpfsListPinStatusResponse.md)
 
 ### Authorization
 
@@ -67,7 +67,7 @@ This endpoint does not need any parameter.
 # **pinningPinsPinidDelete**
 ```objc
 -(NSURLSessionTask*) pinningPinsPinidDeleteWithPinid: (NSString*) pinid
-        completionHandler: (void (^)(NSString* output, NSError* error)) handler;
+        completionHandler: (void (^)(NSError* error)) handler;
 ```
 
 Delete a pinned object
@@ -90,10 +90,7 @@ SWGPinningApi*apiInstance = [[SWGPinningApi alloc] init];
 
 // Delete a pinned object
 [apiInstance pinningPinsPinidDeleteWithPinid:pinid
-          completionHandler: ^(NSString* output, NSError* error) {
-                        if (output) {
-                            NSLog(@"%@", output);
-                        }
+          completionHandler: ^(NSError* error) {
                         if (error) {
                             NSLog(@"Error calling SWGPinningApi->pinningPinsPinidDelete: %@", error);
                         }
@@ -108,7 +105,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**NSString***
+void (empty response body)
 
 ### Authorization
 
@@ -124,7 +121,7 @@ Name | Type | Description  | Notes
 # **pinningPinsPinidGet**
 ```objc
 -(NSURLSessionTask*) pinningPinsPinidGetWithPinid: (NSString*) pinid
-        completionHandler: (void (^)(NSString* output, NSError* error)) handler;
+        completionHandler: (void (^)(SWGTypesIpfsPinStatusResponse* output, NSError* error)) handler;
 ```
 
 Get a pin status object
@@ -147,7 +144,7 @@ SWGPinningApi*apiInstance = [[SWGPinningApi alloc] init];
 
 // Get a pin status object
 [apiInstance pinningPinsPinidGetWithPinid:pinid
-          completionHandler: ^(NSString* output, NSError* error) {
+          completionHandler: ^(SWGTypesIpfsPinStatusResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -165,7 +162,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**NSString***
+[**SWGTypesIpfsPinStatusResponse***](SWGTypesIpfsPinStatusResponse.md)
 
 ### Authorization
 
@@ -181,7 +178,11 @@ Name | Type | Description  | Notes
 # **pinningPinsPinidPost**
 ```objc
 -(NSURLSessionTask*) pinningPinsPinidPostWithPinid: (NSString*) pinid
-        completionHandler: (void (^)(NSString* output, NSError* error)) handler;
+    cid: (NSString*) cid
+    name: (NSString*) name
+    origins: (NSString*) origins
+    meta: (NSString*) meta
+        completionHandler: (void (^)(SWGTypesIpfsPinStatusResponse* output, NSError* error)) handler;
 ```
 
 Replace a pinned object
@@ -199,12 +200,20 @@ SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 
 NSString* pinid = @"pinid_example"; // Pin ID
+NSString* cid = cid_example; // CID of new pin
+NSString* name = name_example; // Name (filename) of new pin (optional)
+NSString* origins = origins_example; // Origins of new pin (optional)
+NSString* meta = meta_example; // Meta information of new pin (optional)
 
 SWGPinningApi*apiInstance = [[SWGPinningApi alloc] init];
 
 // Replace a pinned object
 [apiInstance pinningPinsPinidPostWithPinid:pinid
-          completionHandler: ^(NSString* output, NSError* error) {
+              cid:cid
+              name:name
+              origins:origins
+              meta:meta
+          completionHandler: ^(SWGTypesIpfsPinStatusResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -219,10 +228,14 @@ SWGPinningApi*apiInstance = [[SWGPinningApi alloc] init];
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pinid** | **NSString***| Pin ID | 
+ **cid** | **NSString***| CID of new pin | 
+ **name** | **NSString***| Name (filename) of new pin | [optional] 
+ **origins** | **NSString***| Origins of new pin | [optional] 
+ **meta** | **NSString***| Meta information of new pin | [optional] 
 
 ### Return type
 
-**NSString***
+[**SWGTypesIpfsPinStatusResponse***](SWGTypesIpfsPinStatusResponse.md)
 
 ### Authorization
 
@@ -238,7 +251,7 @@ Name | Type | Description  | Notes
 # **pinningPinsPost**
 ```objc
 -(NSURLSessionTask*) pinningPinsPostWithPin: (SWGTypesIpfsPin*) pin
-        completionHandler: (void (^)(NSString* output, NSError* error)) handler;
+        completionHandler: (void (^)(SWGTypesIpfsPinStatusResponse* output, NSError* error)) handler;
 ```
 
 Add and pin object
@@ -261,7 +274,7 @@ SWGPinningApi*apiInstance = [[SWGPinningApi alloc] init];
 
 // Add and pin object
 [apiInstance pinningPinsPostWithPin:pin
-          completionHandler: ^(NSString* output, NSError* error) {
+          completionHandler: ^(SWGTypesIpfsPinStatusResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -279,7 +292,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**NSString***
+[**SWGTypesIpfsPinStatusResponse***](SWGTypesIpfsPinStatusResponse.md)
 
 ### Authorization
 

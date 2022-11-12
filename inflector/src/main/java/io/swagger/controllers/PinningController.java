@@ -10,10 +10,12 @@ import java.util.List;
 
 import io.swagger.model.*;
 
+import io.swagger.model.TypesIpfsListPinStatusResponse;
 import io.swagger.model.TypesIpfsPin;
+import io.swagger.model.TypesIpfsPinStatusResponse;
 import io.swagger.model.UtilHttpError;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaInflectorServerCodegen", date = "2022-11-08T02:39:38.255Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaInflectorServerCodegen", date = "2022-11-12T00:50:04.476Z")
 public class PinningController  {
   /** 
    * Uncomment and implement as you see fit.  These operations will map
@@ -46,7 +48,7 @@ public class PinningController  {
   */
 
   /*
-    public ResponseContext pinningPinsPinidPOST(RequestContext request , String pinid) {
+    public ResponseContext pinningPinsPinidPOST(RequestContext request , String pinid, String cid, String name, String origins, String meta) {
         return new ResponseContext().status(Status.INTERNAL_SERVER_ERROR).entity( "Not implemented" );
     }
   */

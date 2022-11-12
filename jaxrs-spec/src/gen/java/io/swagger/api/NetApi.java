@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 @Path("/net")
 @Api(description = "the net API")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2022-11-08T02:39:48.642Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2022-11-12T00:50:17.521Z")
 public class NetApi {
 
     @GET

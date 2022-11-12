@@ -62,7 +62,7 @@ PinningApi <- R6::R6Class(
                                  ...)
       
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
-        returnObject <- Character$new()
+        returnObject <- TypesIpfsListPinStatusResponse$new()
         result <- returnObject$fromJSON(httr::content(resp, "text", encoding = "UTF-8"))
         Response$new(returnObject, resp)
       } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
@@ -90,9 +90,7 @@ PinningApi <- R6::R6Class(
                                  ...)
       
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
-        returnObject <- Character$new()
-        result <- returnObject$fromJSON(httr::content(resp, "text", encoding = "UTF-8"))
-        Response$new(returnObject, resp)
+        # void response, no need to return anything
       } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
         Response$new("API client error", resp)
       } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
@@ -118,7 +116,7 @@ PinningApi <- R6::R6Class(
                                  ...)
       
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
-        returnObject <- Character$new()
+        returnObject <- TypesIpfsPinStatusResponse$new()
         result <- returnObject$fromJSON(httr::content(resp, "text", encoding = "UTF-8"))
         Response$new(returnObject, resp)
       } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
@@ -128,10 +126,34 @@ PinningApi <- R6::R6Class(
       }
 
     },
-    pinning_pins_pinid_post = function(pinid, ...){
+    pinning_pins_pinid_post = function(pinid, cid, name, origins, meta, ...){
       args <- list(...)
       queryParams <- list()
       headerParams <- character()
+
+      if (!missing(`cid`)) {
+        body <- `cid`$toJSONString()
+      } else {
+        body <- NULL
+      }
+
+      if (!missing(`name`)) {
+        body <- `name`$toJSONString()
+      } else {
+        body <- NULL
+      }
+
+      if (!missing(`origins`)) {
+        body <- `origins`$toJSONString()
+      } else {
+        body <- NULL
+      }
+
+      if (!missing(`meta`)) {
+        body <- `meta`$toJSONString()
+      } else {
+        body <- NULL
+      }
 
       urlPath <- "/pinning/pins/{pinid}"
       if (!missing(`pinid`)) {
@@ -146,7 +168,7 @@ PinningApi <- R6::R6Class(
                                  ...)
       
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
-        returnObject <- Character$new()
+        returnObject <- TypesIpfsPinStatusResponse$new()
         result <- returnObject$fromJSON(httr::content(resp, "text", encoding = "UTF-8"))
         Response$new(returnObject, resp)
       } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
@@ -176,7 +198,7 @@ PinningApi <- R6::R6Class(
                                  ...)
       
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
-        returnObject <- Character$new()
+        returnObject <- TypesIpfsPinStatusResponse$new()
         result <- returnObject$fromJSON(httr::content(resp, "text", encoding = "UTF-8"))
         Response$new(returnObject, resp)
       } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
